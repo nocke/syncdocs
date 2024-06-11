@@ -1,0 +1,22 @@
+{
+    // REF https://code.visualstudio.com/remote/advancedcontainers/overview
+    // REF https://code.visualstudio.com/docs/devcontainers/containers
+    "image": "mcr.microsoft.com/devcontainers/universal:2",
+    "features": {},
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "dbaeumer.vscode-eslint"
+            ]
+        }
+    },
+    "containerEnv": {
+        "MY_CONTAINER_VAR": "some-value-here",
+        "MY_CONTAINER_VAR2": "${localEnv:SOME_LOCAL_VAR}"
+    },
+    "remoteEnv": {
+        "PATH": "${containerEnv:PATH}:/some/other/path",
+        "MY_REMOTE_VARIABLE": "some-other-value-here",
+        "MY_REMOTE_VARIABLE2": "${localEnv:SOME_LOCAL_VAR}"
+    }
+}
