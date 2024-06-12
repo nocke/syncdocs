@@ -1,0 +1,27 @@
+{
+    "name": "syncdocs",
+    "version": "0.1.0",
+    "description": "client-serverish git syncing",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "node src/index.js",
+        "test": "echo TBD"
+    },
+    "bin": {
+        "syncdocs": "./src/index.js"
+    },
+    "keywords": [
+        "git",
+        "sync",
+        "client server",
+        "javascript"
+    ],
+    "author": "Frank Nocke",
+    "license": "MIT",
+    "dependencies": {
+        "@nocke/util": "^0.1.2"
+    },
+    "engines": {
+        "node": ">=20.0.0"
+    }
+}
