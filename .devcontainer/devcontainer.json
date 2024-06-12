@@ -1,22 +1,46 @@
-{
+
     // REF https://code.visualstudio.com/remote/advancedcontainers/overview
     // REF https://code.visualstudio.com/docs/devcontainers/containers
-    "image": "mcr.microsoft.com/devcontainers/universal:2",
-    "features": {},
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "dbaeumer.vscode-eslint"
-            ]
-        }
-    },
-    "containerEnv": {
-        "MY_CONTAINER_VAR": "some-value-here",
-        "MY_CONTAINER_VAR2": "${localEnv:SOME_LOCAL_VAR}"
-    },
-    "remoteEnv": {
-        "PATH": "${containerEnv:PATH}:/some/other/path",
-        "MY_REMOTE_VARIABLE": "some-other-value-here",
-        "MY_REMOTE_VARIABLE2": "${localEnv:SOME_LOCAL_VAR}"
+    {
+        "name": "neopic-codespace",
+        // "build": {
+        //     "dockerfile": "Dockerfile",
+        //     "context": "..",
+        //     "args": {
+        //         "VARIANT": "20"
+        //     }
+        // },
+        "runArgs": [
+            // "--network",
+            // "host"
+        ],
+        "customizations": {
+            "codespaces": {
+            },
+            "vscode": {
+                "settings": {
+                    "terminal.integrated.shell.linux": "/bin/bash"
+                },
+                "extensions": [
+                    // pretty useful to not accidentally close codespace with ctrl-W/ctrl-Q
+                    "artdiniz.quitcontrol-vscode",
+                    // consider keeping in sync with `.vscode/settings.json`
+                    "dbaeumer.vscode-eslint",
+                    "editorconfig.editorconfig"
+                ]
+            }
+        },
+        "containerEnv": {
+            "MY_CONTAINER_VAR": "some-value-here",
+            "MY_CONTAINER_VAR2": "${localEnv:SOME_LOCAL_VAR}"
+        },
+        "remoteEnv": {
+            "PATH": "${containerEnv:PATH}:/some/other/path",
+            "MY_REMOTE_VARIABLE": "some-other-value-here",
+            "MY_REMOTE_VARIABLE2": "${localEnv:SOME_LOCAL_VAR}"
+        },
+        // "postCreateCommand": "npm install && npm install -g electron-forge vite svelte",
+        "postCreateCommand": "npm install",
+        "remoteUser": "node"
     }
-}
+    
