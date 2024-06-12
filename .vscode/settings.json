@@ -1,0 +1,51 @@
+{
+  "workbench.colorCustomizations": {
+    "sideBar.background": "#707",
+    "tab.inactiveBackground": "#404",
+    "tab.activeBackground": "#707"
+  },
+  "eslint.validate": [
+    "javascript",
+  ],
+  "eslint.options": {
+    "extensions": [
+      ".js",
+      ".mts",
+    ]
+  },
+  "eslint.workingDirectories": [
+    "."
+  ],
+  "eslint.probe": [
+    "javascript",
+    "html"
+  ],
+  "search.exclude": {
+    "**/node_modules": true,
+  },
+
+  "workbench.settings.enableNaturalLanguageSearch": false,
+
+  // REF www.techiediaries.com/enable-json-comments-vs-code
+  "files.associations": {
+    ".prettierrc": "jsonc",
+    ".eslintrc.json": "jsonc",
+    "tsconfig*.json": "jsonc"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features",
+    "javascript.preferences.quoteStyle": "single"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features",
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2
+  },
+
+}
+
