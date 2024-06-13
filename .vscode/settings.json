@@ -1,7 +1,7 @@
 {
   "workbench.colorCustomizations": {
-    "sideBar.background": "#707",
-    "tab.inactiveBackground": "#404",
+    "sideBar.background": "#505",
+    "tab.inactiveBackground": "#303",
     "tab.activeBackground": "#707"
   },
   "eslint.validate": [
