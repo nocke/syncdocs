@@ -2,5 +2,7 @@
   "recommendations": [
     "dbaeumer.vscode-eslint",
     "editorconfig.editorconfig",
+    "github.copilot-chat",
+    "github.copilot",
   ]
 }
