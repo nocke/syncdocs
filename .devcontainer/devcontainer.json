@@ -43,6 +43,6 @@
             "MY_REMOTE_VARIABLE2": "${localEnv:SOME_LOCAL_VAR}"
         },
         "postCreateCommand": "npm install",
-        "remoteUser": "frank"
+        "remoteUser": "node"
     }
     
