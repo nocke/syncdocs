@@ -4,11 +4,11 @@
     "description": "client-serverish git syncing",
     "main": "src/index.js",
     "scripts": {
-        "start": "node src/index.js",
+        "start": "node src/index.js -- param1 \"param two\"",
         "test": "echo TBD"
     },
     "bin": {
-        "syncdocs": "./src/index.js"
+        "syncdocs": "./src/main.js"
     },
     "keywords": [
         "git",
