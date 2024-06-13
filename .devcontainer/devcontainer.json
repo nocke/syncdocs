@@ -16,17 +16,20 @@
         ],
         "customizations": {
             "codespaces": {
+                
             },
             "vscode": {
                 "settings": {
                     "terminal.integrated.shell.linux": "/bin/bash"
                 },
-                "extensions": [
+                "extensions": [                    
                     // pretty useful to not accidentally close codespace with ctrl-W/ctrl-Q
                     "artdiniz.quitcontrol-vscode",
                     // consider keeping in sync with `.vscode/settings.json`
                     "dbaeumer.vscode-eslint",
-                    "editorconfig.editorconfig"
+                    "editorconfig.editorconfig",
+                    "github.copilot-chat",
+                "github.copilot",
                 ]
             }
         },
@@ -39,8 +42,7 @@
             "MY_REMOTE_VARIABLE": "some-other-value-here",
             "MY_REMOTE_VARIABLE2": "${localEnv:SOME_LOCAL_VAR}"
         },
-        // "postCreateCommand": "npm install && npm install -g electron-forge vite svelte",
         "postCreateCommand": "npm install",
-        "remoteUser": "node"
+        "remoteUser": "frank"
     }
     
