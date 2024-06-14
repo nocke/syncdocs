@@ -1,4 +1,4 @@
-import { assert } from 'chai'
+import { assert } from 'chaix'
 
 describe('Simple Test', function () {
   it('should return 2 when adding 1 + 1', function () {
