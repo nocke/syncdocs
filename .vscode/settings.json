@@ -4,32 +4,25 @@
     "tab.inactiveBackground": "#303",
     "tab.activeBackground": "#707"
   },
-  "eslint.validate": [
-    "javascript",
-  ],
-  "eslint.options": {
-    "extensions": [
-      ".js",
-      ".mts",
-    ]
-  },
-  "eslint.workingDirectories": [
-    "."
-  ],
-  "eslint.probe": [
-    "javascript",
-    "html"
-  ],
+  // "eslint.validate": [
+  //   "javascript",
+  // ],
+  // "eslint.experimental.useFlatConfig": true,
+  // "eslint.workingDirectories": [
+  //   "."
+  // ],
+  // "eslint.probe": [
+  //   "javascript",
+  //   "html"
+  // ],
   "search.exclude": {
     "**/node_modules": true,
   },
-
   "workbench.settings.enableNaturalLanguageSearch": false,
 
   // REF www.techiediaries.com/enable-json-comments-vs-code
   "files.associations": {
     ".prettierrc": "jsonc",
-    ".eslintrc.json": "jsonc",
     "tsconfig*.json": "jsonc"
   },
   "[javascript]": {

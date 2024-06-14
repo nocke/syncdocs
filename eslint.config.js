@@ -1,22 +1,25 @@
 import globals from 'globals'
-import js from "@eslint/js";
+import js from "@eslint/js"
 
 // interesting REF: https://github.com/microsoft/vscode-eslint/blob/main/playgrounds/flat-config/eslint.config.js
 
 export default [
   js.configs.recommended,
   {
-    files: ["**/*.js"],
-      languageOptions: {
-        sourceType: "module",
-        globals: {
-          ...globals.browser,
-          ...globals.node,
-          ...globals.es6,
-          ...globals.commonjs
-        }
-      },
-    rules: {
+    "files": [
+      "**/*.js"
+    ],
+    "languageOptions": {
+      "sourceType": "module",
+      "globals": {
+        ...globals.browser,
+        ...globals.node,
+        ...globals.es6,
+        ...globals.commonjs,
+        ...globals.mocha
+      }
+    },
+    "rules": {
       "semi": [
         "warn",
         "never",
@@ -59,11 +62,4 @@ export default [
       "import/no-named-as-default-member": "off"
     }
   }
-];
-
-// TODO  ignore in flat config
-// node_modules/*
-// dist/*
-
-// # all hidden files, too!
-// .*/*
+]
