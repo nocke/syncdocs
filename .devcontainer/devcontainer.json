@@ -40,6 +40,5 @@
     "remoteEnv": {
         "LANG": "fr_FR.UTF-8"
     },
-    "postCreateCommand": "npm install",
-    "remoteUser": "node"
+    "postCreateCommand": "npm install"
 }
