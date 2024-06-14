@@ -5,7 +5,7 @@
     "main": "src/index.js",
     "type": "module",
     "scripts": {
-        "start": "node src/index.js -- param1 \"param two\"",
+        "start": "node src/main.js -- param1 \"param two\"",
         "lint": "eslint",
         "test": "mocha"
     },
