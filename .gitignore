@@ -36,6 +36,9 @@ jspm_packages/
 # Output of 'npm pack'
 *.tgz
 
+# no .psd's
+*.psd
+
 # dotenv environment variables file
 .env
 .env.test

@@ -5,9 +5,12 @@
 
 ## _– “git versioning for bureaucratic cruft, and your family members._
 
-> `syncdocs` is **<ins>not</ins>** a tool to maintain any particular states of source code. (That's what `git` does...) This is a tool, to gather incoming, growing documents (i.e. invoices, notes, pdfs, all that bureaucractic cruft over the year) in one place.
+<img src="./docs/img/syncDocsCover.jpg" alt="SyncDocs Cover Image" style="width: 100%; height: auto;">
+
+
+> `syncdocs` is **<ins>not</ins>** a tool to maintain any particular states of source code. (That's what `git` does...) This is a tool, to gather incoming, growing documents (i.e. invoices, notes, pdfs, all that bureaucractic cruft over the year) in one central place, yet allowing simple decentralized, also offline access.
 >
-> Being end-user friendly with 1 paramater-free command, yet harnessing certain benefits of `git`: versioning, rename detection, largely conflict-free merges when adding to your text-based notes, version stacking on your binary ones, recoverability (it doesn't matter if your server or client get's stolen/destroy, as long as the other side is still around)
+> While being end-user friendly with 1 parameter-free simple command, it harnesses a number of benefits of `git`: versioning of course, rename detection, largely conflict-free merges when adding to your text-based notes, version stacking on your binary ones, recoverability (it doesn't matter if your server or client get's stolen/destroy, as long as the other side is still around), no platform-lock (it's all stil valid git repos…)
 
     > syncdocs
 
@@ -26,7 +29,7 @@ The idea being that your family members can also add stuff offline, i.e. on the 
 * central repo is editable, too, not a pure-server “bare repo”
 * end-users get a single, zero-param `syncdocs` command, no pull, no add, no commit, no push, never to bother with merge conflicts
 * for given usage scenarios collisions shall be rare (it's mostly about adding cruft), but in which case _both_ versions are preserved in version history: the more central one “wins” as the latter version, the other one preserved underneath
-* it's still all valid git repos (no vendor/platform lock-in), so you can add further things (i.e. commit hooks to the server), or analyse/retrieve elder versions with regular git tools like [smartgit](https://www.syntevo.com/smartgit/).
+* it's still all valid git repos (no vendor/platform lock-in), so you can add further things (i.e. commit hooks to the server), or analyse/retrieve elder versions with regular git tools like my favourite, [smartgit](https://www.syntevo.com/smartgit/).
 
 
 ## development
@@ -43,6 +46,8 @@ Presence of a sufficient node (≥v20) and git version (≥v2.2) is expected to 
 
 tbd
 
-• mounting/samba
-• default/user conf
+* getting package
+* install/check node / git version
+* mounting/samba
+* default/user conf
 ...
