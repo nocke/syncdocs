@@ -3,7 +3,7 @@
 [![neopic version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fnocke%2Fsyncdocs%2Fmaster%2Fpackage.json&query=version&label=syncdocs%20version)](https://github.com/nocke/neopic/releases/latest)
 ![nocke syncdocs tests](https://img.shields.io/github/actions/workflow/status/nocke/syncdocs/node20.yml?label=tests%20under%20node.js%2020&link=https%3A%2F%2Fgithub.com%2Fnocke%2Fsyncdocs%2Factions)
 
-## _– “git versioning for bureaucratic cruft, and your family members._
+### – “extremly simplified git versioning for you your family members. <br>surviving your daily flood of bureaucratic cruft…”
 
 <img src="./docs/img/syncDocsCover.jpg" alt="SyncDocs Cover Image" style="width: 100%; height: auto;">
 
@@ -31,10 +31,13 @@ The idea being that your family members can also add stuff offline, i.e. on the 
 * for given usage scenarios collisions shall be rare (it's mostly about adding cruft), but in which case _both_ versions are preserved in version history: the more central one “wins” as the latter version, the other one preserved underneath
 * it's still all valid git repos (no vendor/platform lock-in), so you can add further things (i.e. commit hooks to the server), or analyse/retrieve elder versions with regular git tools like my favourite, [smartgit](https://www.syntevo.com/smartgit/).
 
+## author
+
+Frank Nocke
 
 ## development
 
-This initially developed as a shell script, but things got a bit more tricky resp. robust testing got more crucial, so this derserves a proper package and proper testing to ensure integrity.
+This initially developed as a shell script, but things got a bit more tricky resp. robust testing got more crucial, so this deserved a proper package and proper testing to ensure integrity and be certain on a number of edge cases, mostly around (as a `git` user you guessed it:) merging.
 
 The plan is to deliver as an npm package.
 
