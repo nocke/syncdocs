@@ -1,7 +1,7 @@
 # syncdocs
 
 ![neopic version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fnocke%2Fsyncdocs%2Fmaster%2Fpackage.json&query=version&label=syncdocs%20version)
-![nocke syncdocs tests](https://img.shields.io/github/actions/workflow/status/nocke/syncdocs/node20.yml?label=tests%20under%20node.js%2020&link=https%3A%2F%2Fgithub.com%2Fnocke%2Fsyncdocs%2Factions)
+[![nocke syncdocs tests](https://img.shields.io/github/actions/workflow/status/nocke/syncdocs/node20.yml)](https://github.com/nocke/syncdocs/actions)
 
 ### – “extremly simplified git versioning for you your family members. <br>surviving your daily flood of bureaucratic cruft…”
 
