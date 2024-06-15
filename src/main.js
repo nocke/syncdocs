@@ -1,5 +1,6 @@
 
 import { info, loggedMainWrap } from '@nocke/util'
+import smokecheck from './smokecheck.js'
 
 loggedMainWrap(async () => {
 
@@ -7,4 +8,7 @@ loggedMainWrap(async () => {
     info(`${index}: ${val}`)
   })
 
+  smokecheck()
+
+  // NEXT: script..
 })
