@@ -1,7 +1,10 @@
-// This is your main entry point
-process.argv.forEach((val, index) => {
-  console.log(`${index}: ${val}`)
+
+import { info, loggedMainWrap } from '@nocke/util'
+
+loggedMainWrap(async () => {
+
+  process.argv.forEach((val, index) => {
+    info(`${index}: ${val}`)
+  })
+
 })
-
-console.log('Howdy')
-
