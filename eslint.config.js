@@ -45,7 +45,7 @@ export default [
       "space-before-function-paren": [
         "error",
         {
-          "anonymous": "always",
+          "anonymous": "never",
           "named": "never",
           "asyncArrow": "always"
         }
@@ -59,7 +59,16 @@ export default [
           "maxEOF": 1
         }
       ],
-      "import/no-named-as-default-member": "off"
+      "import/no-named-as-default-member": "off",
+      "no-unused-vars": [
+        "warn",
+        {
+          "vars": "all",
+          "args": "none",
+          "ignoreRestSiblings": true,
+          "argsIgnorePattern": "^_"
+        }
+      ]
     }
   }
 ]
