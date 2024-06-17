@@ -1,0 +1,26 @@
+{
+  "tooBigExtensions": [
+      "exe",
+      "cr2",
+      "crw",
+      "dng",
+      "raw",
+      "mp3",
+      "ogg",
+      "wav",
+      "mp4",
+      "mov",
+      "flv",
+      "f4v",
+      "swf",
+      "wmv",
+      "wma",
+      "avi",
+      "mkv"
+  ],
+  "MAX_FILE_SIZE_MB": 30
+  // certainly NOT defined here:
+  // • machineName (according to uname -n, form of self protection)
+  // • localRepo (like "/common/docs")
+  // • shareRepo (like "/share/docs")
+}
