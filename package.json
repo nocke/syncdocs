@@ -5,10 +5,11 @@
     "main": "src/index.js",
     "type": "module",
     "scripts": {
-        "start": "node src/main.js -- param1 \"param two\"",
-        "lint": "eslint",
-        "lint:fix": "eslint --fix",
-        "test": "mocha"
+      "start": "node src/main.js -- param1 \"param two\"",
+      "lint": "eslint",
+      "lint:fix": "eslint --fix",
+      "test": "mocha",
+      "test:single": "mocha test/simpleRun.spec.js"
     },
     "bin": {
         "syncdocs": "./src/main.js"

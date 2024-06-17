@@ -10,6 +10,9 @@ REF_?*.*
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
+# the “unicode-hardened” testfolder
+tëst -_Føldér😬™/
+
 # Runtime data
 pids
 *.pid
