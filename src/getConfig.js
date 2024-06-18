@@ -32,9 +32,21 @@ const isTestMode = () => {
   return packageJson.name && packageJson.name.toLowerCase().includes('syncdocs')
 }
 
-export default () => {
+export default (cwd) => {
+  info(`getConig | cwd: ${cwd}`)
+
   const testMode = isTestMode()
   info(`Test Mode: ${testMode}`)
+
+  // check if there is a .syncdocs.json in the current dir
+  const syncdocsJsonPath = path.join(PROJECTROOT, '.syncdocs.json')
+  const hasSyncdocsJson = fs.existsSync(syncdocsJsonPath)
+  if (hasSyncdocsJson) {
+    // logic to handle the presence of .syncdocs.json
+  } else {
+    // logic to handle the absence of .syncdocs.json
+  }
+
 
   return {
     'way': 'toGo'
