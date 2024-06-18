@@ -1,7 +1,8 @@
 
 import { info, loggedMainWrap } from '@nocke/util'
-import smokecheck from './smokecheck.js'
+import smokecheck from './smokeCheck.js'
 import fs from 'fs'
+import getConfig from './getConfig.js'
 
 loggedMainWrap(async () => {
 
@@ -10,6 +11,8 @@ loggedMainWrap(async () => {
   })
 
   smokecheck()
+  const config = getConfig()
+  info(`config: ${config}`)
 
   // TEMPTEMP
   fs.writeFile('howdy.txt', 'Hello, world!', (err) => {
