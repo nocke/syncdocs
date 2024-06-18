@@ -1,0 +1,18 @@
+import os from 'os'
+import crypto from 'crypto'
+import path from 'path'
+
+// Schritt 1: Holen Sie sich das temporäre Verzeichnis des Systems
+const tempDir = os.tmpdir()
+
+// Schritt 2: Generieren Sie einen Hash aus dem aktuellen Zeitstempel
+const timeStamp = new Date().getTime().toString()
+const hash = crypto.createHash('sha256').update(timeStamp).digest('hex')
+
+// Schritt 3: Extrahieren Sie die ersten 8 Zeichen des Hashes
+const hashShort = hash.substring(0, 8)
+
+// Schritt 4: Kombinieren Sie den Pfad zum temporären Verzeichnis mit dem generierten Ordnernamen
+const TESTFOLDER = path.join(tempDir, `sctest-${hashShort}`)
+
+console.log(TESTFOLDER)
