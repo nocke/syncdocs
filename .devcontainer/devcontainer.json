@@ -16,7 +16,7 @@
     "customizations": {
         "codespaces": {
             "openFiles": [
-                "README.md"
+                // "README.md"
             ]
         },
         "vscode": {
