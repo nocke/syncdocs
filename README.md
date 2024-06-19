@@ -10,14 +10,14 @@
 
 > `syncdocs` is **<ins>not</ins>** a tool to maintain any particular states of source code. (That's what `git` does...)
 >
-> This is a tool, to gather incoming, growing documents (i.e. invoices, notes, pdfs, all that bureaucractic cruft over the year) in one central place, yet allowing simple decentralized, also offline access. Yet things are still in plain sight in your file system, not buried in a database.
+> This is a tool, to gather incoming, growing documents (i.e. invoices, notes, pdfs, that bureaucractic cruft tree that keeps growing over the years) in one central place, yet allowing simple decentralized, also offline access. Yet things are still in plain sight in your file system, not buried in a database.
 >
-> While being end-user friendly with 1 parameter-free simple command, it harnesses a number of benefits of `git`:
-> * versioning of course, nothing from neither side gets overridden and lost 
-> * rename detection (quite a feature actually)
+> `syncdocs` has 1 end-user friendly command with 0 parameters to use. As much as I love git, no commit|pull|push|rebase and certainly no resolve-merge-conflicts makes things much easier for end users. Yet, it harnesseses many benefits of regular `git` use:
+> * rename detection (quite a feature actually!)
 > * largely conflict-free merges
 > * smart merging of anything plain-text (something-added-here vs. something-added-there still get's merged properly)
 > * recoverability (it doesn't matter if your server or client get's stolen or destroyed, as long as the-other-side is still around)
+> * versioning of course, nothing from neither side gets overridden and lost. (if you are really unlucky, the latest+greatest becomes marked as 2nd-latest version, but that's stil not 'lost'.
 > * no system/platform/vendor-lock (like if you trusted your data to some closed system and some even more complex database)
 
     > syncdocs
@@ -26,7 +26,7 @@
 
 ## technical view
 
-The idea being to sync personal data (text, pdf documents and invoices, screenshots, _not_ source code) between a central git repository (_actively usable_, not "bare", so truly peer-to-peer, which brings some complications) and various workstations with somewhat more common _client repos_
+The idea being to sync personal data (text, pdf documents and invoices, screenshots, _not_ source code) between a central git repository (_actively usable_, not "bare", so truly peer-to-peer, which does brings some technical issues…) and various workstations with regular _client repos_
 
 The idea being that your family members can also add stuff offline, i.e. on the road, and it all eventually ends up everywhere...
 
@@ -45,9 +45,9 @@ Frank Nocke
 
 ## development
 
-This initially developed as a shell script, but things got a bit more tricky on some edge cases, so robust testing definelty required. Sso this deserved a second look, proper package, proper testing to ensure integrity and reliabilty around a number of edge cases, mostly (as a `git` user you guessed it:) merging.
+This initially developed as a shell script, but things got a bit more tricky on some edge cases, so robust testing definelty required. Sso this deserved a second look, proper package, proper testing to ensure integrity and reliabilty around a number of edge cases, primarily as most git users would guess: merging.
 
-The plan is to deliver as an npm package.
+The plan is to deliver as an npm package, so it truly becomes yet-another command (w/o path fiddling).
 
 ## requirements
 
@@ -62,3 +62,13 @@ tbd
 * mounting/samba
 * default/user conf
 ...
+
+## disclaimer
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
