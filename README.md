@@ -3,10 +3,9 @@
 [![Syncdocs version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fnocke%2Fsyncdocs%2Fmaster%2Fpackage.json&query=version&label=Syncdocs%20Version&color=%230f80ff&link=https%3A%2F%2Fgithub.com%2Fnocke%2Fsyncdocs%2Fblob%2Fmaster%2Fpackage.json%23L3)](https://github.com/nocke/syncdocs/blob/master/package.json#L3)
 [![nocke syncdocs tests](https://img.shields.io/github/actions/workflow/status/nocke/syncdocs/node20.yml)](https://github.com/nocke/syncdocs/actions)
 
-### – “extremly simplified git versioning for you emd users. <br>surviving your daily flood of bureaucratic cruft…”
+### extremly simplified git versioning for non-technical users. <br>_“surviving your daily flood of bureaucratic cruft”_
 
 <img src="./docs/img/syncDocsCover.jpg" alt="SyncDocs Cover Image" style="width: 100%; height: auto;">
-
 
 > `syncdocs` is **<ins>not</ins>** a tool to maintain any particular states of source code. (That's what `git` does...)
 >
