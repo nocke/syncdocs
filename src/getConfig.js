@@ -1,4 +1,4 @@
-import { info } from '@nocke/util'
+import { ensureFileExists, fail, info, warn } from '@nocke/util'
 import fs from 'fs'
 import { fileURLToPath } from 'url'
 import path from 'path'
@@ -9,6 +9,17 @@ import path from 'path'
 */
 
 const PROJECTROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../')
+
+function loadJson(path) {
+  ensureFileExists(path,`path: ${path} does not exist`)
+  try {
+    const jsoncfile = fs.readFileSync(path, 'utf8')
+    const jsonWithoutComments = jsoncfile.replace(/(?<=(^|[^"]*"[^"]*")*[^"]*)\/\/.*$/gm, '')
+    return JSON.parse(jsonWithoutComments)
+  } catch (error) {
+    fail(`failed on loading/parsing JSON-File '${path}': ${error.message}`)
+  }
+}
 
 // testmode (are we in the repo) is detected by some crucial files
 // being present and right name in package.json
@@ -28,7 +39,7 @@ const isTestMode = () => {
     return false
   }
 
-  const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+  const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'))
   return packageJson.name && packageJson.name.toLowerCase().includes('syncdocs')
 }
 
@@ -38,17 +49,17 @@ export default (cwd) => {
   const testMode = isTestMode()
   info(`Test Mode: ${testMode}`)
 
-  // check if there is a .syncdocs.json in the current dir
-  const syncdocsJsonPath = path.join(PROJECTROOT, '.syncdocs.json')
+  // check if there is a .syncdocs.json in the CURRENT dir
+  const syncdocsJsonPath = '.syncdocs.json'
   const hasSyncdocsJson = fs.existsSync(syncdocsJsonPath)
-  if (hasSyncdocsJson) {
-    // logic to handle the presence of .syncdocs.json
-  } else {
-    // logic to handle the absence of .syncdocs.json
+  if (!hasSyncdocsJson) {
+    fail(`No .syncdocs.json found in ${PROJECTROOT}`)
   }
 
-
-  return {
-    'way': 'toGo'
+  const combinedJSON = {
+    ...loadJson(path.join(PROJECTROOT, 'defaultConfig.json')),
+    ...loadJson(syncdocsJsonPath)
   }
+
+  return combinedJSON
 }

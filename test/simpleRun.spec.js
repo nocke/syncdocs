@@ -1,37 +1,56 @@
 import fs from 'fs'
 import { fileURLToPath } from 'url'
 import path from 'path'
-import { info, guard } from '@nocke/util'
+import { info, guard, ensureTrue } from '@nocke/util'
 import os from 'os'
 
 
 const PROJECTROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../')
 
-// must be outside project, to be outside another git repo, thus temp
-// Spaces, Umlauts, Unicode - to harden the test
+// 2 testfolders, to simulate the whole thing, assumed local and assumed shared (NAS or so)
+// • must be outside project (no subfolder), otherwise that would be under-a-repo, eh?
+// • spaces, umlauts, unicode to harden the test
 
-const TESTFOLDER = path.join(os.tmpdir(), 'tëst -_Føldér😬™')
+const LOCAL = path.join(os.tmpdir(), 'LØCÅL -_Føldër😬™')
+const SHARE = path.join(os.tmpdir(), 'SHÃRË -_Føldër😬™')
+
+const wipeAndRecreateDir = (dir, label) => {
+  info(`recreating ${label}: ${dir}`)
+  if (fs.existsSync(dir)) {
+    fs.rmSync(dir, { recursive: true })
+  }
+  fs.mkdirSync(dir, { recursive: true })
+  ensureTrue(fs.readdirSync(dir).length === 0, 'test directory not empty')
+}
 
 describe('Main Script Execution', () => {
-  const testFilePath = path.join(TESTFOLDER, 'howdy.txt')
-
+  // const testFilePath = path.join(LOCAL, 'howdy.txt')
   beforeEach(done => {
-    info(`TESTFOLDER: ${TESTFOLDER}`)
-    if (fs.existsSync(TESTFOLDER)) {
-      fs.rmSync(TESTFOLDER, { recursive: true })
+    wipeAndRecreateDir(LOCAL, 'LOCAL TESTDIR')
+    wipeAndRecreateDir(SHARE, 'SHARE TESTDIR')
+    process.chdir(LOCAL)  // crucial for testing !
+
+    // make up appropriate
+    const syncdocs = {
+      machineName: os.hostname(),
+      localRepo: LOCAL,
+      shareRepo: SHARE
     }
-    fs.mkdirSync(TESTFOLDER, { recursive: true })
-    process.chdir(TESTFOLDER)
+
+    fs.writeFileSync(
+      path.join(LOCAL, '.syncdocs.json'),
+      JSON.stringify(syncdocs, null, 2))
+
     done()
   })
 
-  it('should create howdy.txt when main.js is executed', function() {
+  it('should get reasonable config', function() {
 
-    guard('echo Ja', {})
-    process.chdir(PROJECTROOT)
-    guard('ls -l .', {})
-    guard('node ./src/main.js', {})
-    process.chdir(TESTFOLDER)
+    // process.chdir(PROJECTROOT)
+    // guard('ls -l .', {})
+
+    guard(`node ${PROJECTROOT}/src/main.js`, {})
+
     // assert(fs.existsSync(testFilePath), `did not find ${testFilePath}`)
 
     //   if (error) {

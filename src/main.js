@@ -13,7 +13,7 @@ loggedMainWrap(async () => {
 
   smokecheck()
   const config = getConfig(cwd) // Pass cwd to getConfig
-  info(`config: ${JSON.stringify(config)}`)
+  info(`config: ${JSON.stringify(config, null, 2)}`)
 
   // TEMPTEMP
   fs.writeFile('howdy.txt', 'Hello, world!', (err) => {
