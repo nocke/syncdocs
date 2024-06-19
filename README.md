@@ -12,7 +12,13 @@
 >
 > This is a tool, to gather incoming, growing documents (i.e. invoices, notes, pdfs, all that bureaucractic cruft over the year) in one central place, yet allowing simple decentralized, also offline access. Yet things are still in plain sight in your file system, not buried in a database.
 >
-> While being end-user friendly with 1 parameter-free simple command, it harnesses a number of benefits of `git`: versioning of course, rename detection, largely conflict-free merges when adding to your text-based notes, version stacking on your binary ones, recoverability (it doesn't matter if your server or client get's stolen/destroy, as long as the other side is still around), no platform-lock (it's all stil valid git repos…)
+> While being end-user friendly with 1 parameter-free simple command, it harnesses a number of benefits of `git`:
+> * versioning of course, nothing from neither side gets overridden and lost 
+> * rename detection (quite a feature actually)
+> * largely conflict-free merges
+> * smart merging of anything plain-text (something-added-here vs. something-added-there still get's merged properly)
+> * recoverability (it doesn't matter if your server or client get's stolen or destroyed, as long as the-other-side is still around)
+> * no system/platform/vendor-lock (like if you trusted your data to some closed system and some even more complex database)
 
     > syncdocs
 
