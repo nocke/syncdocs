@@ -18,7 +18,7 @@
       "avi",
       "mkv"
   ],
-  "MAX_FILE_SIZE_MB": 30
+  "MAX_FILE_SIZE_MB": 30,
   // certainly NOT defined here:
   // • machineName (according to uname -n, form of self protection)
   // • localRepo (like "/common/docs")

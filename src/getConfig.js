@@ -10,14 +10,16 @@ import path from 'path'
 
 const PROJECTROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../')
 
-function loadJson(path) {
+// yes, can handle JSONC with comments, and trailing commas \o/
+function loadJsonC(path) {
   ensureFileExists(path,`path: ${path} does not exist`)
   try {
     const jsoncfile = fs.readFileSync(path, 'utf8')
-    const jsonWithoutComments = jsoncfile.replace(/(?<=(^|[^"]*"[^"]*")*[^"]*)\/\/.*$/gm, '')
-    return JSON.parse(jsonWithoutComments)
+    const withoutComments = jsoncfile.replace(/(?<=(^|[^"]*"[^"]*")*[^"]*)\/\/.*$/gm, '')
+    const withoutTrailingCommas = withoutComments.replace(/,\s*([\]}])/g, '$1'); // Remove trailing commas
+    return JSON.parse(withoutTrailingCommas)
   } catch (error) {
-    fail(`failed on loading/parsing JSON-File '${path}': ${error.message}`)
+    fail(`failed on loading/parsing JSON/JSONC-File '${path}': ${error.message}`)
   }
 }
 
@@ -58,8 +60,8 @@ export default (cwd) => {
   }
   ensureFolderExists('.git',`No .git folder in current directory ${cwd}, only a .syncdocs.json — trouble?`)
 
-  const defaultJson = loadJson(path.join(PROJECTROOT, 'defaultConfig.json'))
-  const projectJson = loadJson(syncdocsJsonPath)
+  const defaultJson = loadJsonC(path.join(PROJECTROOT, 'defaultConfig.json'))
+  const projectJson = loadJsonC(syncdocsJsonPath)
 
   const mustBeInProjectJson = ['localRepo', 'shareRepo', 'machineName']
   mustBeInProjectJson.forEach((prop) => {

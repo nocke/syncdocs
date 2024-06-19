@@ -23,7 +23,7 @@
   // REF www.techiediaries.com/enable-json-comments-vs-code
   "files.associations": {
     ".prettierrc": "jsonc",
-    "tsconfig*.json": "jsonc"
+    "defaultConfig.json": "jsonc"
   },
   "[javascript]": {
     "editor.defaultFormatter": "vscode.typescript-language-features",
