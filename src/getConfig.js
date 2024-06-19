@@ -1,4 +1,4 @@
-import { ensureFileExists, fail, info, warn } from '@nocke/util'
+import { ensureFalse, ensureFileExists, ensureFolderExists, ensureTrue, ensureTruthy, fail, info, warn } from '@nocke/util'
 import fs from 'fs'
 import { fileURLToPath } from 'url'
 import path from 'path'
@@ -46,6 +46,7 @@ const isTestMode = () => {
 export default (cwd) => {
   info(`getConig | cwd: ${cwd}`)
 
+  // unclear if needed
   const testMode = isTestMode()
   info(`Test Mode: ${testMode}`)
 
@@ -53,12 +54,22 @@ export default (cwd) => {
   const syncdocsJsonPath = '.syncdocs.json'
   const hasSyncdocsJson = fs.existsSync(syncdocsJsonPath)
   if (!hasSyncdocsJson) {
-    fail(`No .syncdocs.json found in ${PROJECTROOT}`)
+    fail(`No .syncdocs.json found in current directory ${cwd} — not a syncdocs folder?`)
   }
+  ensureFolderExists('.git',`No .git folder in current directory ${cwd}, only a .syncdocs.json — trouble?`)
+
+  const defaultJson = loadJson(path.join(PROJECTROOT, 'defaultConfig.json'))
+  const projectJson = loadJson(syncdocsJsonPath)
+
+  const mustBeInProjectJson = ['localRepo', 'shareRepo', 'machineName']
+  mustBeInProjectJson.forEach((prop) => {
+    ensureTrue( defaultJson[prop] === undefined, `key: ${prop} must not be in defaulttJson`)
+    ensureTruthy( projectJson[prop] && projectJson[prop].length > 0, `key: ${prop} must be in .syncdocs.json`)
+  })
 
   const combinedJSON = {
-    ...loadJson(path.join(PROJECTROOT, 'defaultConfig.json')),
-    ...loadJson(syncdocsJsonPath)
+    ...defaultJson,
+    ...projectJson
   }
 
   return combinedJSON
