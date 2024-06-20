@@ -9,18 +9,20 @@
 
 > `syncdocs` is **<ins>not</ins>** a tool to maintain any particular states of source code. (That's what `git` does...)
 >
-> This is a tool, to gather incoming, growing documents (i.e. invoices, notes, pdfs, that bureaucractic cruft tree that keeps growing over the years) in one central place, yet allowing simple decentralized, also offline access. Yet things are still in plain sight in your file system, not buried in a database.
+> This is a tool, that helks handling those incoming, ever-growing documents (i.e. invoices, notes, pdfs, bureaucractic cruft) in one central place, yet also decentralized, with offline access and syncing as a nobrainer.
 >
-> `syncdocs` has 1 end-user friendly command with 0 parameters to use. As much as I love git, no commit|pull|push|rebase and certainly no resolve-merge-conflicts makes things much easier for end users. Yet, it harnesseses many benefits of regular `git` use:
-> * rename detection (quite a feature actually!)
+> `syncdocs` has 1 end-user friendly command with 0 parameters to use. As much as I love git, no commit|pull|push|rebase and certainly no resolve-merge-conflicts makes things much easier for end users. Yet, it does harnesses many benefits of regular `git` use:
+> * very easy syncing
+> * versioning of course
 > * largely conflict-free merges
-> * smart merging of anything plain-text (something-added-here vs. something-added-there still get's merged properly)
+> * rename detection (quite a feature actually!)
+> * smart merging of anything plain-text (something-added-here vs. something-added-there in the same file will go together as you may expect)
+> * some opinionated-ness, when non-text file changes collide (PDFs, images, …). spoiler: both versions will make it into recoverably version history)
 > * recoverability (it doesn't matter if your server or client get's stolen or destroyed, as long as the-other-side is still around)
-> * versioning of course, nothing from neither side gets overridden and lost. (if you are really unlucky, the latest+greatest becomes marked as 2nd-latest version, but that's stil not 'lost'.
-> * no system/platform/vendor-lock (like if you trusted your data to some closed system and some even more complex database)
+> * no system/platform/vendor-lock (all files are still in plain sight, in your file system, in a valid git repository, not buried in some fragile database, somewhere in the cloud, …)
 
     > syncdocs
-
+    TBD
     ▁
 
 ## technical view
@@ -50,7 +52,7 @@ The plan is to deliver as an npm package, so it truly becomes yet-another comman
 
 ## requirements
 
-Presence of a sufficient node (≥v20) and git version (≥v2.2) is expected to be present (syncdocs doesn't install neither) and checked on (every) script run.
+Presence of a sufficient node (≥v20) and git version (≥v2.2) is expected to be present (syncdocs doesn't install neither) and [checked on (every) script run](src/smokeCheck.js#L6).
 
 ## getting started
 
