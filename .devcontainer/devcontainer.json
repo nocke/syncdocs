@@ -1,7 +1,7 @@
 // REF https://code.visualstudio.com/remote/advancedcontainers/overview
 // REF https://code.visualstudio.com/docs/devcontainers/containers
 {
-    "name": "neopic-codespace",
+    "name": "syncdocs-codespace",
     // "build": {
     //     "dockerfile": "Dockerfile",
     //     "context": "..",
