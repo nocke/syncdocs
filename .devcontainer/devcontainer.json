@@ -1,5 +1,9 @@
 // REF https://code.visualstudio.com/remote/advancedcontainers/overview
 // REF https://code.visualstudio.com/docs/devcontainers/containers
+// for docker images
+// https://github.com/devcontainers/images/tree/main/src
+// i.e.
+// https://github.com/devcontainers/images/tree/main/src/javascript-node
 {
     "name": "syncdocs-codespace",
     // "build": {
