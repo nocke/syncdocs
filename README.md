@@ -33,7 +33,7 @@ The idea being that your family members can also add stuff offline, i.e. on the 
 
 [![](https://mermaid.ink/img/pako:eNqNjs8KgzAMh1-l5KSgL1DGQOZuYxd3W3cINv5h1kpsN4b67uvE4wYLhCQfHz8yQWk1gYSqs8-yQXbikqtehMoiBQXxgzg6Z0WsIN642KXpfh5ffTmLw7VCWWHa4eDsIE7ruH0R83_F40_x05CAITbY6vDztFJwDRlSIMOqke8KVL8ED72zRYgE6dhTAmx93UCI7sZw-UGjo7zFmtFsdHkDOqFXxA?type=png)](https://mermaid.live/edit#pako:eNqNjs8KgzAMh1-l5KSgL1DGQOZuYxd3W3cINv5h1kpsN4b67uvE4wYLhCQfHz8yQWk1gYSqs8-yQXbikqtehMoiBQXxgzg6Z0WsIN642KXpfh5ffTmLw7VCWWHa4eDsIE7ruH0R83_F40_x05CAITbY6vDztFJwDRlSIMOqke8KVL8ED72zRYgE6dhTAmx93UCI7sZw-UGjo7zFmtFsdHkDOqFXxA)
 
-**Sounds like something `git` would do out of the box anyhow? Yeah, but...**
+**Sounds like something `git` would do out of the box, right? Yeah, but...**
 
 * central repo is editable, too, _not_ a pure-server “bare repo”
 * **end-users get a single, zero-param `syncdocs` command, no pull, no add, no commit, no push, never to bother with merge conflicts**
