@@ -7,11 +7,11 @@
 {
   "name": "syncdocs-codespace",
   // "build": {
-  //     "dockerfile": "Dockerfile",
-  //     "context": "..",
-  //     "args": {
-  //         "VARIANT": "20"
-  //     }
+  //      "dockerfile": "Dockerfile"
+  // //     "context": "..",
+  // //     "args": {
+  // //         "VARIANT": "20"
+  // //     }
   // },
   "runArgs": [
     // "--network",
@@ -32,19 +32,19 @@
       },
       "extensions": [
         "dbaeumer.vscode-eslint",
-        "hbenl.vscode-mocha-test-adapter"
+        "hbenl.vscode-mocha-test-adapter",
+        "EditorConfig.EditorConfig"
       ]
-      },
-      "extensions": [
-        // pretty useful to not accidentally close codespace with ctrl-W/ctrl-Q
-        "artdiniz.quitcontrol-vscode",
-        // consider keeping in sync with `.vscode/settings.json`
-        "dbaeumer.vscode-eslint",
-        "editorconfig.editorconfig",
-        "github.copilot-chat",
-        "github.copilot",
-      ]
-    }
+    },
+    "extensions": [
+      // pretty useful to not accidentally close codespace with ctrl-W/ctrl-Q
+      "artdiniz.quitcontrol-vscode",
+      // consider keeping in sync with `.vscode/settings.json`
+      "dbaeumer.vscode-eslint",
+      "editorconfig.editorconfig",
+      "github.copilot-chat",
+      "github.copilot",
+    ]
   },
   "containerEnv": {
     "LANG": "en_US.UTF-8",
