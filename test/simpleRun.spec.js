@@ -3,6 +3,7 @@ import { fileURLToPath } from 'url'
 import path from 'path'
 import os from 'os'
 import { info, guard, ensureTrue, warn } from '@nocke/util'
+import getConfig from '../src/getConfig.js'
 
 const PROJECTROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../')
 // 2 testfolders, to simulate the whole thing, assumed local and assumed shared (NAS or so)
@@ -69,7 +70,13 @@ describe('Main Script Execution', () => {
   it.only('should get reasonable config', function() {
 
     console.log('howdy, partner!')
-    
+    console.log('Current working directory:', process.cwd());
+
+    const config = getConfig(process.cwd())
+    console.log('config:', config)
+
+    // NEXT
+
   })
 
 })
