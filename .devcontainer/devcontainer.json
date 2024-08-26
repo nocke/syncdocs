@@ -31,7 +31,8 @@
         "workbench.activityBar.visible": false
       },
       "extensions": [
-        "dbaeumer.vscode-eslint"
+        "dbaeumer.vscode-eslint",
+        "hbenl.vscode-mocha-test-adapter"
       ]
       },
       "extensions": [
