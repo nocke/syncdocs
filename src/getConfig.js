@@ -46,7 +46,7 @@ const isTestMode = () => {
 }
 
 export default (cwd) => {
-  info(`getConig | cwd: ${cwd}`)
+  info(`getConfig | cwd: ${cwd}`)
 
   // unclear if needed
   const testMode = isTestMode()

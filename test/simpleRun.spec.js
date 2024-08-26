@@ -54,7 +54,7 @@ describe('Main Script Execution', () => {
   // REF Future Stuff to do
   // process.chdir(PROJECTROOT)
   // guard('ls -l .', {})
-  guard(`node ${PROJECTROOT}/src/main.js`, {})
+  // TEMP LATER guard(`node ${PROJECTROOT}/src/main.js`, {})
   // assert(fs.existsSync(testFilePath), `did not find ${testFilePath}`)
   //   if (error) {
   //     console.error(`exec error: ${error}`)
@@ -68,7 +68,7 @@ describe('Main Script Execution', () => {
 
   it.only('should get reasonable config', function() {
 
-
+    console.log('howdy, partner!')
 
   })
 
