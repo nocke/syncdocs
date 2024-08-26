@@ -2,7 +2,7 @@
   "workbench.colorCustomizations": {
     "sideBar.background": "#505",
     "tab.inactiveBackground": "#303",
-    "tab.activeBackground": "#707"
+    "tab.activeBackground": "#707",
   },
   // "eslint.validate": [
   //   "javascript",
@@ -19,7 +19,6 @@
     "**/node_modules": true,
   },
   "workbench.settings.enableNaturalLanguageSearch": false,
-
   // REF www.techiediaries.com/enable-json-comments-vs-code
   "files.associations": {
     ".prettierrc": "jsonc",
@@ -39,6 +38,5 @@
     "editor.insertSpaces": true,
     "editor.tabSize": 2
   },
-
+  "javascript.format.insertSpaceBeforeFunctionParenthesis": false
 }
-

@@ -29,7 +29,10 @@
         "locale": "en",
         "editor.minimap.enabled": false,
         "workbench.activityBar.visible": false
-      }
+      },
+      "extensions": [
+        "dbaeumer.vscode-eslint"
+      ]
       },
       "extensions": [
         // pretty useful to not accidentally close codespace with ctrl-W/ctrl-Q
