@@ -26,8 +26,10 @@
     "vscode": {
       "settings": {
         "terminal.integrated.shell.linux": "/bin/bash",
-        "locale": "en", // this line to set VS Code language to English
-        "editor.minimap.enabled": false // this line to disable the minimap
+        "locale": "en",
+        "editor.minimap.enabled": false,
+        "workbench.activityBar.visible": false
+      }
       },
       "extensions": [
         // pretty useful to not accidentally close codespace with ctrl-W/ctrl-Q
