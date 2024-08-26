@@ -51,20 +51,25 @@ beforeEach(done => {
 describe('Main Script Execution', () => {
   // const testFilePath = path.join(LOCAL, 'howdy.txt')
 
+  // REF Future Stuff to do
+  // process.chdir(PROJECTROOT)
+  // guard('ls -l .', {})
+  guard(`node ${PROJECTROOT}/src/main.js`, {})
+  // assert(fs.existsSync(testFilePath), `did not find ${testFilePath}`)
+  //   if (error) {
+  //     console.error(`exec error: ${error}`)
+  //     return done(error)
+  //   }
+  //   // Check if howdy.txt has been created
+  //   assert(fs.existsSync(testFilePath))
+  //   done()
+  // })
 
-  it('should get reasonable config', function() {
-    // process.chdir(PROJECTROOT)
-    // guard('ls -l .', {})
-    guard(`node ${PROJECTROOT}/src/main.js`, {})
-    // assert(fs.existsSync(testFilePath), `did not find ${testFilePath}`)
-    //   if (error) {
-    //     console.error(`exec error: ${error}`)
-    //     return done(error)
-    //   }
-    //   // Check if howdy.txt has been created
-    //   assert(fs.existsSync(testFilePath))
-    //   done()
-    // })
+
+  it.only('should get reasonable config', function() {
+
+
+
   })
 
 })

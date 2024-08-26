@@ -63,9 +63,9 @@ export default (cwd) => {
   const defaultJson = loadJsonC(path.join(PROJECTROOT, 'defaultConfig.json'))
   const projectJson = loadJsonC(syncdocsJsonPath)
 
-  const mustBeInProjectJson = ['localRepo', 'shareRepo', 'machineName']
+  const mustBeInProjectJson = ['machineName', 'localRepo', 'shareRepo']
   mustBeInProjectJson.forEach((prop) => {
-    ensureTrue( defaultJson[prop] === undefined, `key: ${prop} must not be in defaulttJson`)
+    ensureTrue( defaultJson[prop] === undefined, `key: ${prop} must not be in defaultJson`)
     ensureTruthy( projectJson[prop] && projectJson[prop].length > 0, `key: ${prop} must be in .syncdocs.json`)
   })
 
