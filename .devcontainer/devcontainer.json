@@ -5,48 +5,50 @@
 // i.e.
 // https://github.com/devcontainers/images/tree/main/src/javascript-node
 {
-    "name": "syncdocs-codespace",
-    // "build": {
-    //     "dockerfile": "Dockerfile",
-    //     "context": "..",
-    //     "args": {
-    //         "VARIANT": "20"
-    //     }
-    // },
-    "runArgs": [
-        // "--network",
-        // "host"
-    ],
-    "customizations": {
-        "codespaces": {
-            "openFiles": [
-                // "README.md"
-            ]
-        },
-        "vscode": {
-            "settings": {
-                "terminal.integrated.shell.linux": "/bin/bash"
-            },
-            "extensions": [
-                // pretty useful to not accidentally close codespace with ctrl-W/ctrl-Q
-                "artdiniz.quitcontrol-vscode",
-                // consider keeping in sync with `.vscode/settings.json`
-                "dbaeumer.vscode-eslint",
-                "editorconfig.editorconfig",
-                "github.copilot-chat",
-                "github.copilot",
-            ]
-        }
+  "name": "syncdocs-codespace",
+  // "build": {
+  //     "dockerfile": "Dockerfile",
+  //     "context": "..",
+  //     "args": {
+  //         "VARIANT": "20"
+  //     }
+  // },
+  "runArgs": [
+    // "--network",
+    // "host"
+  ],
+  "customizations": {
+    "codespaces": {
+      "openFiles": [
+        // "README.md"
+      ]
     },
-    "containerEnv": {
-        "LANG": "en_US.UTF-8",
-        "LC_CTYPE": "en_US.UTF-8",
-        "LC_ALL": "en_US.UTF-8"
-    },
-    "remoteEnv": {
-      "LANG": "en_US.UTF-8",
-      "LC_CTYPE": "en_US.UTF-8",
-      "LC_ALL": "en_US.UTF-8"
-    },
-    "postCreateCommand": "npm install"
+    "vscode": {
+      "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash",
+        "locale": "en", // this line to set VS Code language to English
+        "editor.minimap.enabled": false // this line to disable the minimap
+      },
+      "extensions": [
+        // pretty useful to not accidentally close codespace with ctrl-W/ctrl-Q
+        "artdiniz.quitcontrol-vscode",
+        // consider keeping in sync with `.vscode/settings.json`
+        "dbaeumer.vscode-eslint",
+        "editorconfig.editorconfig",
+        "github.copilot-chat",
+        "github.copilot",
+      ]
+    }
+  },
+  "containerEnv": {
+    "LANG": "en_US.UTF-8",
+    "LC_CTYPE": "en_US.UTF-8",
+    "LC_ALL": "en_US.UTF-8"
+  },
+  "remoteEnv": {
+    "LANG": "en_US.UTF-8",
+    "LC_CTYPE": "en_US.UTF-8",
+    "LC_ALL": "en_US.UTF-8"
+  },
+  "postCreateCommand": "npm install"
 }
