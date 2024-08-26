@@ -33,7 +33,9 @@
       "extensions": [
         "dbaeumer.vscode-eslint",
         "hbenl.vscode-mocha-test-adapter",
-        "EditorConfig.EditorConfig"
+        "EditorConfig.EditorConfig",
+        "GitHub.copilot",
+        "GitHub.copilot-chat"
       ]
     },
     "extensions": [
