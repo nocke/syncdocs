@@ -15,6 +15,13 @@ function loadJsonC(path) {
   ensureFileExists(path,`path: ${path} does not exist`)
   try {
     const jsoncfile = fs.readFileSync(path, 'utf8')
+
+    // treat an empty file (nothing but whitespace) no longer than 50 bytes  like an empty object
+    if (jsoncfile.length < 50 && jsoncfile.trim().length === 0)
+    {
+      return {}
+    }
+
     const withoutComments = jsoncfile.replace(/(?<=(^|[^"]*"[^"]*")*[^"]*)\/\/.*$/gm, '')
     const withoutTrailingCommas = withoutComments.replace(/,\s*([\]}])/g, '$1') // Remove trailing commas
     return JSON.parse(withoutTrailingCommas)
@@ -85,6 +92,7 @@ const getConfig = (cwd) => {
 
   const combinedJSON = {
     ...defaultJson,
+    ...shareJson,
     ...localJson
   }
 

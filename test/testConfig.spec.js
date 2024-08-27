@@ -61,29 +61,55 @@ beforeEach(done => {
   done()
 })
 
-describe('Config Tests', () => {
+describe.only('Config Tests', () => {
 
-  it.only('should get reasonable config', function() {
+  it('should get reasonable config', function() {
     assert.strictEqual(process.cwd(), LOCAL) // ensure setup did not mess up
     const config = getConfig(process.cwd())
 
     ensureTrue(typeof config.machineName === 'string' && config.machineName.length > 0, 'machineName is missing or empty')
-    assert.strictEqual(config.localRepo, LOCAL)
-    assert.strictEqual(config.shareRepo, SHARE)
-    assert.deepStrictEqual(config.excludedExtensions, defaultConfig.excludedExtensions)
+
+    assert.deepStrictEqual(config, {
+      localRepo: LOCAL,
+      shareRepo: SHARE,
+      machineName: os.hostname(),
+      excludedExtensions: defaultConfig.excludedExtensions,
+      MAX_FILE_SIZE_MB: 42 // coming from .syncshare.json override
+    })
 
     assert(Number.isInteger(config.MAX_FILE_SIZE_MB), 'MAX_FILE_SIZE_MB is not a whole number')
     assert(config.MAX_FILE_SIZE_MB >= 5 && config.MAX_FILE_SIZE_MB <= 300, 'MAX_FILE_SIZE_MB is not between 5 and 300')
   })
 
   it('negative: referenced non-existing .syncshare', function() {
-    // TODO !!!
-    const config = getConfig(process.cwd())
+    fs.unlinkSync(path.join(SHARE, '.syncshare.json'))
+    assert.throws(
+      () => {
+        getConfig(process.cwd())
+      }, Error)
+
+    // const config = getConfig(process.cwd())
+    // assert.deepStrictEqual(config, {
+    //   localRepo: LOCAL,
+    //   shareRepo: SHARE,
+    //   machineName: os.hostname(),
+    //   excludedExtensions: defaultConfig.excludedExtensions,
+    //   MAX_FILE_SIZE_MB: defaultConfig.MAX_FILE_SIZE_MB
+    // })
+
   })
 
   it('negative: to little in .synclocal', function() {
-    // TODO !!!
+    fs.writeFileSync(path.join(SHARE, '.syncshare.json'), '  \n  ')
     const config = getConfig(process.cwd())
+
+    assert.deepStrictEqual(config, {
+      localRepo: LOCAL,
+      shareRepo: SHARE,
+      machineName: os.hostname(),
+      excludedExtensions: defaultConfig.excludedExtensions,
+      MAX_FILE_SIZE_MB: defaultConfig.MAX_FILE_SIZE_MB
+    })
   })
 
   it('negative: to much in .synclocal', function() {
