@@ -16,7 +16,7 @@ function loadJsonC(path) {
   try {
     const jsoncfile = fs.readFileSync(path, 'utf8')
     const withoutComments = jsoncfile.replace(/(?<=(^|[^"]*"[^"]*")*[^"]*)\/\/.*$/gm, '')
-    const withoutTrailingCommas = withoutComments.replace(/,\s*([\]}])/g, '$1'); // Remove trailing commas
+    const withoutTrailingCommas = withoutComments.replace(/,\s*([\]}])/g, '$1') // Remove trailing commas
     return JSON.parse(withoutTrailingCommas)
   } catch (error) {
     fail(`failed on loading/parsing JSON/JSONC-File '${path}': ${error.message}`)
@@ -53,26 +53,44 @@ const getConfig = (cwd) => {
   info(`Test Mode: ${testMode}`)
 
   // check if there is a .syncdocs.json in the CURRENT dir
-  const syncdocsJsonPath = '.syncdocs.json'
-  const hasSyncdocsJson = fs.existsSync(syncdocsJsonPath)
-  if (!hasSyncdocsJson) {
+  const localJsonPath = '.synclocal.json'
+  if (!fs.existsSync(localJsonPath)) {
     fail(`No .syncdocs.json found in current directory ${cwd} — not a syncdocs folder?`)
   }
   ensureFolderExists('.git',`No .git folder in current directory ${cwd}, only a .syncdocs.json — trouble?`)
 
   const defaultJson = loadJsonC(path.join(PROJECTROOT, 'defaultConfig.json'))
-  const projectJson = loadJsonC(syncdocsJsonPath)
+  const localJson = loadJsonC(localJsonPath)
 
-  const mustBeInProjectJson = ['machineName', 'localRepo', 'shareRepo']
-  mustBeInProjectJson.forEach((prop) => {
+  const mandatoryLocalKeys = ['machineName', 'localRepo', 'shareRepo']
+
+  ensureTrue(Object.keys(localJson).length ==mandatoryLocalKeys.length,
+    `local '.syncdocs.json' must have exactly ${mandatoryLocalKeys.length} keys: ${mandatoryLocalKeys.join(', ')}`)
+
+  mandatoryLocalKeys.forEach((prop) => {
     ensureTrue( defaultJson[prop] === undefined, `key: ${prop} must not be in defaultJson`)
-    ensureTruthy( projectJson[prop] && projectJson[prop].length > 0, `key: ${prop} must be in .syncdocs.json`)
+    ensureTruthy( localJson[prop] && localJson[prop].length > 0, `key: ${prop} must be in .syncdocs.json`)
   })
+
+  ensureFolderExists(localJson.shareRepo, `folder given as 'shareRepo' '${localJson.shareRepo}' does not exist`)
+  const shareJsonPath = path.join(localJson.shareRepo, '.syncshare.json')
+  ensureFileExists(shareJsonPath, `central .syncshare json: '${shareJsonPath}' does not exist`)
+
+  const shareJson = loadJsonC(shareJsonPath)
+  mandatoryLocalKeys.forEach((prop) => { // ensure absence in shareJson
+    ensureFalse(!!shareJson[prop], `key: ${prop} must not be in shareJson`)
+  })
+
+  const minimumAggregateKeys = [ ...mandatoryLocalKeys, 'excludedExtensions', 'MAX_FILE_SIZE_MB']
 
   const combinedJSON = {
     ...defaultJson,
-    ...projectJson
+    ...localJson
   }
+
+  minimumAggregateKeys.forEach((prop) => {
+    ensureTruthy(combinedJSON[prop], `key: ${prop} must be in combinedJSON`)
+  })
 
   return combinedJSON
 }

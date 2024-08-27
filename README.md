@@ -70,24 +70,26 @@ tbd
 
 ## configuration
 
-your SHARE repo (in 1 single place, i.e. storage media on your NAS) needs to provide a `.syncshare.json`file with ... TODO
-// NEXT
+The “topology” here is very simply a „star“ with 1 central SHARE repo (in which you may indeed work, too!) and an arbitrary number of LOCAL repos. Where that “arbitrary” number might very well be 1, if you happen to have one desktop for home (as SHARE) and 1 laptop on the go. It's easy to later on add additional members.
+
+your SHARE repo (in 1 single place, i.e. storage media on your NAS) needs to provide a `.syncshare.json`file with global settings relating to your entire system
+
+→ if you are happy with [the default settings](./defaultConfig.json), e.g. for  `excludedExtensions`, `MAX_FILE_SIZE_MB`, it's sheer presence is enough (with or without empty curly brackets inside). Then it's just a marker file.
 
 ```json
 {
-
+  "excludedExtensions": [... ,
+  "MAX_FILE_SIZE_MB": 30,
 }
 ```
 
-if not overriden, regarding `excludedExtensions`, `MAX_FILE_SIZE_MB` [these defaults](./defaultConfig.json) will “rule”...
-
-
-your LOCAL repo (on every one of your machines) needs to provide a `.synclocal.json`file with EXACTLY these 2 entries:
+your LOCAL repo (on every one of your machines) however does need to provide a `.synclocal.json` file with EXACTLY these 2 entries:
 
 ```json
 {
-    machineName: os.hostname(), // what uname -n delivers, just a safety measure
-    shareRepo: SHARE // the share repo to connect to
+    machineName: os.hostname(), // what uname -n delivers, localRepo: '/home/user/'
+    localRepo: 'mySyncDocsFolder', // again, ensuring the right  place
+    shareRepo: '/fritzbox/usb-stick/SHARE' // the share repo to connect to
 }
 ```
 

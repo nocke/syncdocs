@@ -24,63 +24,78 @@ const wipeAndRecreateDir = (dir, label) => {
   ensureTrue(fs.readdirSync(dir).length === 0, 'test directory not empty')
 }
 
+let synclocal // overriden in some (negative) tests
+
 beforeEach(done => {
   wipeAndRecreateDir(LOCAL, 'LOCAL TESTDIR')
   wipeAndRecreateDir(SHARE, 'SHARE TESTDIR')
 
-  // make up a local repo, including syncdocs file:
-  const syncdocs = {
+  // prepare .synclocal.json
+  synclocal = {
     machineName: os.hostname(),
-    // NEXT: localRepo is not needed !
+    localRepo: LOCAL,
     shareRepo: SHARE
   }
 
   fs.writeFileSync(
     path.join(LOCAL, '.synclocal.json'),
-    JSON.stringify(syncdocs, null, 2))
+    JSON.stringify(synclocal, null, 2))
+
+  // prepare .syncshare.json
+  const syncshare = {
+    "MAX_FILE_SIZE_MB": 42,
+  }
+
+  fs.writeFileSync(
+    path.join(SHARE, '.syncshare.json'),
+    JSON.stringify(syncshare, null, 2))
 
   const DIRS = [LOCAL, SHARE]
   DIRS.forEach(DIR => {
     warn(`setting up ${DIR}`)
     process.chdir(DIR)
     guard('git init', { mute: true })
-
-    // NEXT `cp -r some stuff to both sides, then deviate
   })
 
   process.chdir(LOCAL)  // crucial for testing !
   done()
 })
 
-describe('Main Script Execution', () => {
-  // const testFilePath = path.join(LOCAL, 'howdy.txt')
-
-  // guard('ls -l .', {})
-  // TEMP LATER guard(`node ${PROJECTROOT}/src/main.js`, {})
-  // assert(fs.existsSync(testFilePath), `did not find ${testFilePath}`)
-  //   if (error) {
-  //     console.error(`exec error: ${error}`)
-  //     return done(error)
-  //   }
-  //   // Check if howdy.txt has been created
-  //   assert(fs.existsSync(testFilePath))
-  //   done()
-  // })
+describe('Config Tests', () => {
 
   it.only('should get reasonable config', function() {
-    console.log('howdy, partner!')
-    console.log('Current working directory:', process.cwd())
-
+    assert.strictEqual(process.cwd(), LOCAL) // ensure setup did not mess up
     const config = getConfig(process.cwd())
-    // console.log('config:', config)
 
-    ensureTrue(typeof config.machineName === 'string' && config.machineName.length > 0, 'machineName is missing or empty');
-    assert.strictEqual(config.localRepo, LOCAL);
+    ensureTrue(typeof config.machineName === 'string' && config.machineName.length > 0, 'machineName is missing or empty')
+    assert.strictEqual(config.localRepo, LOCAL)
     assert.strictEqual(config.shareRepo, SHARE)
     assert.deepStrictEqual(config.excludedExtensions, defaultConfig.excludedExtensions)
 
-    assert(Number.isInteger(config.MAX_FILE_SIZE_MB), 'MAX_FILE_SIZE_MB is not a whole number');
-    assert(config.MAX_FILE_SIZE_MB >= 5 && config.MAX_FILE_SIZE_MB <= 300, 'MAX_FILE_SIZE_MB is not between 5 and 300');
+    assert(Number.isInteger(config.MAX_FILE_SIZE_MB), 'MAX_FILE_SIZE_MB is not a whole number')
+    assert(config.MAX_FILE_SIZE_MB >= 5 && config.MAX_FILE_SIZE_MB <= 300, 'MAX_FILE_SIZE_MB is not between 5 and 300')
   })
+
+  it('negative: referenced non-existing .syncshare', function() {
+    // TODO !!!
+    const config = getConfig(process.cwd())
+  })
+
+  it('negative: to little in .synclocal', function() {
+    // TODO !!!
+    const config = getConfig(process.cwd())
+  })
+
+  it('negative: to much in .synclocal', function() {
+    // TODO !!!
+    const config = getConfig(process.cwd())
+  })
+
+  it('negative: to much in .synclocal', function() {
+    // TODO !!!
+    const config = getConfig(process.cwd())
+  })
+
+
 
 })
