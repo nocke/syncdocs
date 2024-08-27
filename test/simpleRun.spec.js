@@ -28,15 +28,15 @@ beforeEach(done => {
   wipeAndRecreateDir(LOCAL, 'LOCAL TESTDIR')
   wipeAndRecreateDir(SHARE, 'SHARE TESTDIR')
 
-  // make up appropriate
+  // make up a local repo, including syncdocs file:
   const syncdocs = {
     machineName: os.hostname(),
-    localRepo: LOCAL,
+    // NEXT: localRepo is not needed !
     shareRepo: SHARE
   }
 
   fs.writeFileSync(
-    path.join(LOCAL, '.syncdocs.json'),
+    path.join(LOCAL, '.synclocal.json'),
     JSON.stringify(syncdocs, null, 2))
 
   const DIRS = [LOCAL, SHARE]
@@ -55,8 +55,6 @@ beforeEach(done => {
 describe('Main Script Execution', () => {
   // const testFilePath = path.join(LOCAL, 'howdy.txt')
 
-  // REF Future Stuff to do
-  // process.chdir(PROJECTROOT)
   // guard('ls -l .', {})
   // TEMP LATER guard(`node ${PROJECTROOT}/src/main.js`, {})
   // assert(fs.existsSync(testFilePath), `did not find ${testFilePath}`)
@@ -79,7 +77,7 @@ describe('Main Script Execution', () => {
     ensureTrue(typeof config.machineName === 'string' && config.machineName.length > 0, 'machineName is missing or empty');
     assert.strictEqual(config.localRepo, LOCAL);
     assert.strictEqual(config.shareRepo, SHARE)
-    assert.deepStrictEqual(config.tooBigExtensions, defaultConfig.tooBigExtensions)
+    assert.deepStrictEqual(config.excludedExtensions, defaultConfig.excludedExtensions)
 
     assert(Number.isInteger(config.MAX_FILE_SIZE_MB), 'MAX_FILE_SIZE_MB is not a whole number');
     assert(config.MAX_FILE_SIZE_MB >= 5 && config.MAX_FILE_SIZE_MB <= 300, 'MAX_FILE_SIZE_MB is not between 5 and 300');

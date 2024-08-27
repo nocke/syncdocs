@@ -3,23 +3,27 @@
 [![Syncdocs version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fnocke%2Fsyncdocs%2Fmaster%2Fpackage.json&query=version&label=Syncdocs%20Version&color=%230f80ff&link=https%3A%2F%2Fgithub.com%2Fnocke%2Fsyncdocs%2Fblob%2Fmaster%2Fpackage.json%23L3)](https://github.com/nocke/syncdocs/blob/master/package.json#L3)
 [![nocke syncdocs tests](https://img.shields.io/github/actions/workflow/status/nocke/syncdocs/node20.yml)](https://github.com/nocke/syncdocs/actions)
 
-### extremly simplified git versioning for non-technical users. <br>_“surviving your daily flood of bureaucratic cruft”_
+### highly simplified git versioning for non-technical users. <br>_“surviving your daily flood of bureaucratic cruft”_
 
 <img src="./docs/img/syncDocsCover.jpg" alt="SyncDocs Cover Image" style="width: 100%; height: auto;">
 
-> `syncdocs` is **<ins>not</ins>** a tool to maintain any particular states of source code. (That's what `git` does...)
->
-> This is a tool, that helks handling those incoming, ever-growing documents (i.e. invoices, notes, pdfs, bureaucractic cruft) in one central place, yet also decentralized, with offline access and syncing as a nobrainer.
->
-> `syncdocs` has 1 end-user friendly command with 0 parameters to use. As much as I love git, no commit|pull|push|rebase and certainly no resolve-merge-conflicts makes things much easier for end users. Yet, it does harnesses many benefits of regular `git` use:
-> * very easy syncing
-> * versioning of course
-> * largely conflict-free merges
-> * rename detection (quite a feature actually!)
-> * smart merging of anything plain-text (something-added-here vs. something-added-there in the same file will go together as you may expect)
-> * some opinionated-ness, when non-text file changes collide (PDFs, images, …). spoiler: both versions will make it into recoverably version history)
-> * recoverability (it doesn't matter if your server or client get's stolen or destroyed, as long as the-other-side is still around)
-> * no system/platform/vendor-lock (all files are still in plain sight, in your file system, in a valid git repository, not buried in some fragile database, somewhere in the cloud, …)
+### Is `syncdocs` a good tool to work on my source code?
+
+> No, isn't. Use regular `git`, to have defined precisely version states for every file of your repository for every commit you do. Nothing of value for you here.
+
+### I need to jam my letters, invoices, tax stuff, etc… together in one place, well in several places, but basically the same huge tree. I want mutual updating and not loosing elder versions of stuff. Should be extremly easy to do that syncing.
+
+> This is a tool, that helps handling those incoming, ever-growing documents (i.e. invoices, notes, pdfs, bureaucractic cruft) in one central place, yet also decentralized, with offline access and syncing as a nobrainer.
+
+`syncdocs` has 1 end-user friendly command with 0 parameters to use. As much as I love git, no commit|pull|push|rebase and certainly no resolve-merge-conflicts makes things much easier for end users. Yet, it does harnesses many benefits of regular `git` use:
+ * very easy syncing
+ * versioning of course
+ * largely conflict-free merges
+ * rename detection (quite a feature actually!)
+ * smart merging of anything plain-text (something-added-here vs. something-added-there in the same file will go together as you may expect)
+ * some opinionated-ness, when non-text file changes collide (PDFs, images, …). spoiler: both versions will make it into recoverably version history)
+ * recoverability (it doesn't matter if your server or client get's stolen or destroyed, as long as the-other-side is still around)
+ * no system/platform/vendor-lock (all files are still in plain sight, in your file system, in a valid git repository, no fragile database, not somewhere in the cloud, …) If you do get into trouble, at least a git-savy person should be able to help.
 
     > syncdocs
     TBD
@@ -27,7 +31,7 @@
 
 ## technical view
 
-The idea being to sync personal data (text, pdf documents and invoices, screenshots, _not_ source code) between a central git repository (_actively usable_, not "bare", so truly peer-to-peer, which does brings some technical issues…) and various workstations with regular _client repos_
+The idea being to sync personal data (text, pdf documents and invoices, screenshots, _not_ source code) between a central git repository and various workstations with regular _client repos_
 
 The idea being that your family members can also add stuff offline, i.e. on the road, and it all eventually ends up everywhere...
 
@@ -37,8 +41,8 @@ The idea being that your family members can also add stuff offline, i.e. on the 
 
 * central repo is editable, too, _not_ a pure-server “bare repo”
 * **end-users get a single, zero-param `syncdocs` command, no pull, no add, no commit, no push, never to bother with merge conflicts**
-* collisions in given usage scenarios shall be rare (it's mostly about adding cruft), but will occur: in which case _both_ versions are preserved in version history: the more central one “wins” as the latter version, the other one preserved underneath
-* it's still valid git repos on all ends (no vendor/platform lock-in), so you can add/integrate further things (i.e. commit hooks to the server), or analyse/retrieve elder versions with regular git tools like my favourite, [smartgit](https://www.syntevo.com/smartgit/).
+* collisions in given usage scenarios shall be rare (it's mostly about adding cruft), but will occur: in which case _both_ versions are preserved in version history: the more central one “wins” as the latter version, the other one preserved underneath.
+* it's still valid git repos on all ends (→no vendor-lock/platform neutrality), so you can add/integrate further things (i.e. commit hooks to the server), or analyse/retrieve elder versions with regular git tools like my favourite, [smartgit](https://www.syntevo.com/smartgit/).
 
 ## author
 
@@ -56,12 +60,39 @@ Presence of a sufficient node (≥v20) and git version (≥v2.2) is expected to 
 
 ## getting started
 
+
 tbd
 
 * getting package
 * install/check node / git version
 * mounting/samba
 * default/user conf
+
+## configuration
+
+your SHARE repo (in 1 single place, i.e. storage media on your NAS) needs to provide a `.syncshare.json`file with ... TODO
+// NEXT
+
+```json
+{
+
+}
+```
+
+if not overriden, regarding `excludedExtensions`, `MAX_FILE_SIZE_MB` [these defaults](./defaultConfig.json) will “rule”...
+
+
+your LOCAL repo (on every one of your machines) needs to provide a `.synclocal.json`file with EXACTLY these 2 entries:
+
+```json
+{
+    machineName: os.hostname(), // what uname -n delivers, just a safety measure
+    shareRepo: SHARE // the share repo to connect to
+}
+```
+
+End of line comments with `//`, so called JSONC, are okay. Also “trailing commas” are no problem.
+
 ...
 
 ## disclaimer

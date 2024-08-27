@@ -1,5 +1,7 @@
 {
-  "tooBigExtensions": [
+  // extensions you consider either not to “documents”
+  // and/or too big (like movies) or otherwise not desirable (i.e. executables)
+  "excludedExtensions": [
       "exe",
       "cr2",
       "crw",
@@ -18,9 +20,9 @@
       "avi",
       "mkv"
   ],
+  // max individual file size in MB
   "MAX_FILE_SIZE_MB": 30,
-  // certainly NOT defined here:
-  // • machineName (according to uname -n, form of self protection)
-  // • localRepo (like "/common/docs")
-  // • shareRepo (like "/share/docs")
+  // NOT defined here, but required in each `.synclocal.json`:
+  // • machineName (according to uname -n, as a form of assurance)
+  // • shareRepo (like "/share/docs" or simlar mount, point to the central share repo)
 }
