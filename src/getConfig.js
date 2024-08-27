@@ -45,7 +45,7 @@ const isTestMode = () => {
   return packageJson.name && packageJson.name.toLowerCase().includes('syncdocs')
 }
 
-export default (cwd) => {
+const getConfig = (cwd) => {
   info(`getConfig | cwd: ${cwd}`)
 
   // unclear if needed
@@ -76,3 +76,6 @@ export default (cwd) => {
 
   return combinedJSON
 }
+
+getConfig.loadJsonC = loadJsonC // sneak out, handy for testing
+export default getConfig

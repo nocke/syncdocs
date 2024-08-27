@@ -4,13 +4,17 @@ import path from 'path'
 import os from 'os'
 import { info, guard, ensureTrue, warn } from '@nocke/util'
 import getConfig from '../src/getConfig.js'
+import { assert } from 'chai'
 
 const PROJECTROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../')
 // 2 testfolders, to simulate the whole thing, assumed local and assumed shared (NAS or so)
 // • must be outside project (no subfolder), otherwise that would be under-a-repo, eh?
 // • spaces, umlauts, unicode to harden the test
-const LOCAL = path.join(os.tmpdir(), 'LØCÅL -_Føldër😬™')
-const SHARE = path.join(os.tmpdir(), 'SHÃRË -_Føldër😬™')
+
+const defaultConfig = getConfig.loadJsonC(`${PROJECTROOT}/defaultConfig.json`)
+
+const LOCAL = path.join(os.tmpdir(), 'LØCÅL -_Føldër😬')
+const SHARE = path.join(os.tmpdir(), 'SHÃRË -_Føldër😬')
 const wipeAndRecreateDir = (dir, label) => {
   info(`recreating ${label}: ${dir}`)
   if (fs.existsSync(dir)) {
@@ -44,7 +48,6 @@ beforeEach(done => {
     // NEXT `cp -r some stuff to both sides, then deviate
   })
 
-
   process.chdir(LOCAL)  // crucial for testing !
   done()
 })
@@ -66,17 +69,20 @@ describe('Main Script Execution', () => {
   //   done()
   // })
 
-
   it.only('should get reasonable config', function() {
-
     console.log('howdy, partner!')
-    console.log('Current working directory:', process.cwd());
+    console.log('Current working directory:', process.cwd())
 
     const config = getConfig(process.cwd())
-    console.log('config:', config)
+    // console.log('config:', config)
 
-    // NEXT
+    ensureTrue(typeof config.machineName === 'string' && config.machineName.length > 0, 'machineName is missing or empty');
+    assert.strictEqual(config.localRepo, LOCAL);
+    assert.strictEqual(config.shareRepo, SHARE)
+    assert.deepStrictEqual(config.tooBigExtensions, defaultConfig.tooBigExtensions)
 
+    assert(Number.isInteger(config.MAX_FILE_SIZE_MB), 'MAX_FILE_SIZE_MB is not a whole number');
+    assert(config.MAX_FILE_SIZE_MB >= 5 && config.MAX_FILE_SIZE_MB <= 300, 'MAX_FILE_SIZE_MB is not between 5 and 300');
   })
 
 })
