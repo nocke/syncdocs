@@ -32,5 +32,22 @@
   {
     "key": "ctrl+d",
     "command": "editor.action.duplicateSelection"
+  },
+  {
+    "key": "ctrl+k s",
+    "command": "-saveAll"
+  },
+  {
+    "key": "ctrl+alt+s",
+    "command": "workbench.action.files.saveFiles"
+  },
+  {
+    "key": "ctrl+shift+i",
+    "command": "-workbench.action.quickchat.toggle",
+    "when": "chatIsEnabled"
+  },
+  {
+    "key": "ctrl+shift+i",
+    "command": "eslint.executeAutofix"
   }
 ]

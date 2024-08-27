@@ -3,6 +3,8 @@
     "sideBar.background": "#505",
     "tab.inactiveBackground": "#303",
     "tab.activeBackground": "#707",
+    "titleBar.inactiveBackground": "#303",
+    "titleBar.activeBackground": "#303"
   },
   // "eslint.validate": [
   //   "javascript",
