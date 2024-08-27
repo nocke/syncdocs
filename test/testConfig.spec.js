@@ -16,7 +16,7 @@ const defaultConfig = getConfig.loadJsonC(`${PROJECTROOT}/defaultConfig.json`)
 const LOCAL = path.join(os.tmpdir(), 'LØCÅL -_Føldër😬')
 const SHARE = path.join(os.tmpdir(), 'SHÃRË -_Føldër😬')
 const wipeAndRecreateDir = (dir, label) => {
-  info(`recreating ${label}: ${dir}`)
+  // info(`recreating ${label}: ${dir}`)
   if (fs.existsSync(dir)) {
     fs.rmSync(dir, { recursive: true })
   }
@@ -24,7 +24,9 @@ const wipeAndRecreateDir = (dir, label) => {
   ensureTrue(fs.readdirSync(dir).length === 0, 'test directory not empty')
 }
 
-let synclocal // overriden in some (negative) tests
+// overriden in some (negative) tests
+let synclocal
+let syncshare
 
 beforeEach(done => {
   wipeAndRecreateDir(LOCAL, 'LOCAL TESTDIR')
@@ -39,20 +41,22 @@ beforeEach(done => {
 
   fs.writeFileSync(
     path.join(LOCAL, '.synclocal.json'),
-    JSON.stringify(synclocal, null, 2))
+    JSON.stringify(synclocal, null, 2)
+  )
 
   // prepare .syncshare.json
-  const syncshare = {
+  syncshare = {
     "MAX_FILE_SIZE_MB": 42,
   }
 
   fs.writeFileSync(
     path.join(SHARE, '.syncshare.json'),
-    JSON.stringify(syncshare, null, 2))
+    JSON.stringify(syncshare, null, 2)
+  )
 
   const DIRS = [LOCAL, SHARE]
   DIRS.forEach(DIR => {
-    warn(`setting up ${DIR}`)
+    // warn(`setting up ${DIR}`)
     process.chdir(DIR)
     guard('git init', { mute: true })
   })
@@ -81,25 +85,23 @@ describe.only('Config Tests', () => {
     assert(config.MAX_FILE_SIZE_MB >= 5 && config.MAX_FILE_SIZE_MB <= 300, 'MAX_FILE_SIZE_MB is not between 5 and 300')
   })
 
-  it('negative: referenced non-existing .syncshare', function() {
+  it('negative: non-existing .syncshare', function() {
     fs.unlinkSync(path.join(SHARE, '.syncshare.json'))
     assert.throws(
       () => {
         getConfig(process.cwd())
       }, Error)
-
-    // const config = getConfig(process.cwd())
-    // assert.deepStrictEqual(config, {
-    //   localRepo: LOCAL,
-    //   shareRepo: SHARE,
-    //   machineName: os.hostname(),
-    //   excludedExtensions: defaultConfig.excludedExtensions,
-    //   MAX_FILE_SIZE_MB: defaultConfig.MAX_FILE_SIZE_MB
-    // })
-
   })
 
-  it('negative: to little in .synclocal', function() {
+  it('negative: non-existing .synclocal', function() {
+    fs.unlinkSync(path.join(LOCAL, '.synclocal.json'))
+    assert.throws(
+      () => {
+        getConfig(process.cwd())
+      }, Error)
+  })
+
+  it('positive: empty but existing .syncshare', function() {
     fs.writeFileSync(path.join(SHARE, '.syncshare.json'), '  \n  ')
     const config = getConfig(process.cwd())
 
@@ -108,20 +110,33 @@ describe.only('Config Tests', () => {
       shareRepo: SHARE,
       machineName: os.hostname(),
       excludedExtensions: defaultConfig.excludedExtensions,
-      MAX_FILE_SIZE_MB: defaultConfig.MAX_FILE_SIZE_MB
+      MAX_FILE_SIZE_MB: defaultConfig.MAX_FILE_SIZE_MB // original config then
     })
   })
 
-  it('negative: to much in .synclocal', function() {
-    // TODO !!!
-    const config = getConfig(process.cwd())
+  it('negative: too much in .syncshare', function() {
+    syncshare.banana = '42'
+    fs.writeFileSync(
+      path.join(SHARE, '.syncshare.json'),
+      JSON.stringify(syncshare, null, 2)
+    )
+
+    assert.throws(
+      () => {
+        getConfig(process.cwd())
+      }, Error)
   })
 
-  it('negative: to much in .synclocal', function() {
-    // TODO !!!
-    const config = getConfig(process.cwd())
+  it('negative: too much in .synclocal', function() {
+    synclocal.banana = '42'
+    fs.writeFileSync(
+      path.join(LOCAL, '.synclocal.json'),
+      JSON.stringify(synclocal, null, 2)
+    )
+    assert.throws(
+      () => {
+        getConfig(process.cwd())
+      }, Error)
   })
-
-
 
 })

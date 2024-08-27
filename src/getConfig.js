@@ -1,4 +1,4 @@
-import { ensureFalse, ensureFileExists, ensureFolderExists, ensureTrue, ensureTruthy, fail, info, warn } from '@nocke/util'
+import { ensureFalse, ensureFileExists, ensureFolderExists, ensureTrue, ensureTruthy, fail, important, info, warn } from '@nocke/util'
 import fs from 'fs'
 import { fileURLToPath } from 'url'
 import path from 'path'
@@ -7,16 +7,19 @@ import path from 'path'
    • defaultConfig (excludes Dir info)
    • (localSyncDir)/.syncdocs.json (also serving as a marker file!)
 */
-
 const PROJECTROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../')
 
-// yes, can handle JSONC with comments, and trailing commas \o/
+const mandatoryLocalKeys = ['machineName', 'localRepo', 'shareRepo']
+const knownShareKeys = ['MAX_FILE_SIZE_MB', 'excludedExtensions']
+const minimumAggregateKeys = [ ...mandatoryLocalKeys, 'excludedExtensions', 'MAX_FILE_SIZE_MB']
+
+// • yes, can handle JSONC with comments and trailing commas \o/
+// • treats empty files ( <50 byte length) like empty objects
 function loadJsonC(path) {
   ensureFileExists(path,`path: ${path} does not exist`)
   try {
     const jsoncfile = fs.readFileSync(path, 'utf8')
 
-    // treat an empty file (nothing but whitespace) no longer than 50 bytes  like an empty object
     if (jsoncfile.length < 50 && jsoncfile.trim().length === 0)
     {
       return {}
@@ -69,26 +72,28 @@ const getConfig = (cwd) => {
   const defaultJson = loadJsonC(path.join(PROJECTROOT, 'defaultConfig.json'))
   const localJson = loadJsonC(localJsonPath)
 
-  const mandatoryLocalKeys = ['machineName', 'localRepo', 'shareRepo']
-
-  ensureTrue(Object.keys(localJson).length ==mandatoryLocalKeys.length,
+  // ensuree strict number of local keys
+  ensureTrue(Object.keys(localJson).length == mandatoryLocalKeys.length,
     `local '.syncdocs.json' must have exactly ${mandatoryLocalKeys.length} keys: ${mandatoryLocalKeys.join(', ')}`)
-
   mandatoryLocalKeys.forEach((prop) => {
     ensureTrue( defaultJson[prop] === undefined, `key: ${prop} must not be in defaultJson`)
     ensureTruthy( localJson[prop] && localJson[prop].length > 0, `key: ${prop} must be in .syncdocs.json`)
   })
 
+  // ensure share keys: no overlap with local, no unknown keys
   ensureFolderExists(localJson.shareRepo, `folder given as 'shareRepo' '${localJson.shareRepo}' does not exist`)
   const shareJsonPath = path.join(localJson.shareRepo, '.syncshare.json')
   ensureFileExists(shareJsonPath, `central .syncshare json: '${shareJsonPath}' does not exist`)
 
   const shareJson = loadJsonC(shareJsonPath)
-  mandatoryLocalKeys.forEach((prop) => { // ensure absence in shareJson
+  // ensure absence in shareJson first (next would also cover, but more helpful error msg)
+  mandatoryLocalKeys.forEach((prop) => {
     ensureFalse(!!shareJson[prop], `key: ${prop} must not be in shareJson`)
   })
 
-  const minimumAggregateKeys = [ ...mandatoryLocalKeys, 'excludedExtensions', 'MAX_FILE_SIZE_MB']
+  Object.keys(shareJson).forEach((prop) => {
+    ensureTrue(knownShareKeys.includes(prop), `.syncshare: unknown key '${prop}'`)
+  })
 
   const combinedJSON = {
     ...defaultJson,
@@ -97,7 +102,7 @@ const getConfig = (cwd) => {
   }
 
   minimumAggregateKeys.forEach((prop) => {
-    ensureTruthy(combinedJSON[prop], `key: ${prop} must be in combinedJSON`)
+    ensureTruthy(combinedJSON[prop], `key: ${prop} must be found in combinedJSON`)
   })
 
   return combinedJSON
