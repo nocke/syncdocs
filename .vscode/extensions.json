@@ -4,5 +4,6 @@
     "editorconfig.editorconfig",
     "github.copilot-chat",
     "github.copilot",
+    "wayou.vscode-todo-highlight",
   ]
 }

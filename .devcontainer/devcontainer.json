@@ -28,14 +28,33 @@
         "terminal.integrated.shell.linux": "/bin/bash",
         "locale": "en",
         "editor.minimap.enabled": false,
-        "workbench.activityBar.visible": false
+        "workbench.activityBar.visible": false,
+        "todohighlight.keywords": [
+          {
+            "text": "TODO",
+            "color": "#c99",
+            "backgroundColor": "#600"
+          },
+          {
+            "text": "RBF", // remove before flight
+            "color": "#c99",
+            "backgroundColor": "#600"
+          },
+          {
+            "text": "FRAGE",
+            "color": "white",
+            "backgroundColor": "#980",
+            "border": "2px solid #980"
+          }
+        ]
       },
       "extensions": [
         "dbaeumer.vscode-eslint",
         "hbenl.vscode-mocha-test-adapter",
         "EditorConfig.EditorConfig",
         "GitHub.copilot",
-        "GitHub.copilot-chat"
+        "GitHub.copilot-chat",
+        "wayou.vscode-todo-highlight"
       ]
     },
     "extensions": [
