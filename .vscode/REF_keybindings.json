@@ -1,0 +1,348 @@
+// Place your key bindings in this file to overwrite the defaults
+[
+  // formatting shortcuts with i ==========================
+  // REF
+  // • "typescriptreact" for `.tsx` files!
+  // • "html" for HTML files
+  // • "css" for CSS files
+  // • "javascript" for JavaScript files
+  // • "typescript" for TypeScript files
+  // • "json" for JSON files
+  // disable default shortcut
+  {
+    "key": "ctrl+shift+i",
+    "command": "-editor.action.formatDocument"
+  },
+
+  // mantra: a) The first matching "when" condition gets executed only.
+  // • includes removeUnusedImports
+  // • re-enable for lintable files
+
+  {
+    "key": "ctrl+shift+i",
+    "command": "runCommands",
+    "args": {
+      "commands": ["typescript.removeUnusedImports", "eslint.executeAutofix"]
+    },
+    "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor && ( editorLangId == javascript || editorLangId == typescript ||editorLangId == typescriptreact )"
+  },
+
+  // exception svelte: needs format and lint
+  {
+    "key": "ctrl+shift+i",
+    "command": "runCommands",
+    "args": {
+      "commands": ["editor.action.formatDocument", "eslint.executeAutofix"]
+    },
+    "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor && editorLangId == svelte"
+  },
+
+  // anyone not lintable be vscode-formatted!
+  // (must somehow exclude above list to work there, despite docs. likely vscode bug.)
+  {
+    "key": "ctrl+shift+i",
+    "command": "editor.action.formatDocument",
+    "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor && !( editorLangId == javascript || editorLangId == typescript ||editorLangId == typescriptreact )"
+  },
+
+  // other stuff ==========================
+  {
+    "key": "ctrl+d",
+    "command": "editor.action.copyLinesDownAction",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+e",
+    "command": "editor.action.deleteLines",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    // see https://stackoverflow.com/a/48646552/444255
+    "key": "ctrl+alt+c",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Run Sample"
+  },
+  {
+    "key": "ctrl+m",
+    "command": "workbench.action.terminal.toggleTerminal"
+  },
+  {
+    "key": "ctrl+alt+b",
+    "command": "workbench.action.toggleActivityBarVisibility"
+  },
+  {
+    "key": "alt+shift+t",
+    "command": "trailing-spaces.deleteTrailingSpaces",
+    "when": "editorTextFocus"
+  },
+
+  {
+    "key": "alt+up",
+    "command": "-workbench.action.terminal.focusPreviousPane",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "alt+left",
+    "command": "-workbench.action.terminal.focusPreviousPane",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+[Backquote]",
+    "command": "workbench.action.terminal.focus",
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "ctrl+[Backquote]",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+alt+s",
+    "command": "workbench.action.files.saveAll"
+  },
+  {
+    "key": "alt+w",
+    "command": "editor.debug.action.selectionToWatch",
+    "when": "inDebugMode"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "settings.cycle.lineNumbers",
+    "when": "editorFocus"
+  },
+  {
+    "key": "ctrl+shift+l",
+    "command": "settings.cycle.miniMap",
+    "when": "editorFocus"
+  },
+  {
+    "key": "shift+numpad_enter",
+    "command": "npm.runSelectedScript"
+  },
+  {
+    "key": "",
+    "command": "-revealFileInOS"
+  },
+  {
+    "key": "ctrl+shift+alt+r",
+    "command": "workbench.action.terminal.runSelectedText"
+  },
+  {
+    "key": "ctrl+shift+pageup",
+    "command": "workbench.action.toggleMaximizedPanel"
+  },
+  // ctrl-e is a nuisance in Terminal (should jump to end of command. With this, it does again.)
+  {
+    "key": "ctrl+e",
+    "command": "-workbench.action.quickOpen"
+  },
+  {
+    "key": "ctrl+shift+t",
+    "command": "workbench.action.terminal.new",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+shift+r",
+    "command": "-rerunSearchEditorSearch",
+    "when": "inSearchEditor"
+  },
+  {
+    "key": "ctrl+shift+r",
+    "command": "-workbench.action.quickOpenNavigatePreviousInRecentFilesPicker",
+    "when": "inQuickOpen && inRecentFilesPicker"
+  },
+  {
+    "key": "ctrl+shift+t",
+    "command": "test-explorer.focus"
+  },
+  {
+    "key": "ctrl+shift+l",
+    "command": "-selectAllSearchEditorMatches",
+    "when": "inSearchEditor"
+  },
+  {
+    "key": "ctrl+shift+l",
+    "command": "-editor.action.selectHighlights",
+    "when": "editorFocus"
+  },
+  {
+    "key": "ctrl+shift+l",
+    "command": "-addCursorsAtSearchResults",
+    "when": "fileMatchOrMatchFocus && searchViewletVisible"
+  },
+
+  // FUCKYEAH, debug mode )========================================================
+
+  // REF https://code.visualstudio.com/docs/getstarted/keybindings#_accepted-keys
+  // REF /home/frank/Downloads/TEMP_QUARRY_debug-shortcuts.txt
+  // {
+  // 	"key": "ctrl+f5",
+  // 	"command": "-workbench.action.debug.run",
+  // 	"when": "!inDebugMode"
+  // },
+  {
+    "key": "ctrl+numpad_divide",
+    "command": "workbench.action.debug.start",
+    "when": "!inDebugMode"
+  },
+  {
+    "key": "ctrl+numpad_divide",
+    "command": "workbench.action.debug.restart",
+    "when": "inDebugMode"
+  },
+  {
+    "key": "ctrl+numpad_subtract",
+    "command": "workbench.action.debug.stop",
+    "when": "inDebugMode"
+  },
+
+  // ⤵  ⟶  ⤴ ❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚❚
+  {
+    "key": "f9",
+    "command": "-workbench.action.debug.stepInto",
+    "when": "inDebugMode"
+  },
+  {
+    "key": "f10",
+    "command": "-workbench.action.debug.stepOver",
+    "when": "inDebugMode"
+  },
+  {
+    "key": "f11",
+    "command": "-workbench.action.debug.stepOut",
+    "when": "inDebugMode"
+  },
+  {
+    "key": "f5",
+    "command": "-workbench.action.debug.continue",
+    "when": "inDebugMode"
+  },
+  {
+    "key": "numpad_divide",
+    "command": "workbench.action.debug.stepInto",
+    "when": "inDebugMode"
+  },
+  {
+    "key": "numpad_multiply",
+    "command": "workbench.action.debug.stepOver",
+    "when": "inDebugMode"
+  },
+  {
+    "key": "numpad_subtract",
+    "command": "workbench.action.debug.stepOut",
+    "when": "inDebugMode"
+  },
+  {
+    "key": "numpad_add",
+    "command": "workbench.action.debug.continue",
+    "when": "inDebugMode"
+  },
+  {
+    "key": "ctrl+numpad7",
+    "command": "editor.debug.action.toggleBreakpoint",
+    "when": "debuggersAvailable && editorTextFocus"
+  },
+  {
+    "key": "ctrl+numpad8",
+    "command": "editor.debug.action.selectionToRepl",
+    "when": "inDebugMode"
+  },
+  {
+    "key": "ctrl+numpad9",
+    "command": "editor.debug.action.selectionToWatch",
+    "when": "debuggersAvailable && editorTextFocus"
+  },
+  {
+    "key": "f9",
+    "command": "-editor.debug.action.toggleBreakpoint",
+    "when": "debuggersAvailable && editorTextFocus"
+  },
+  {
+    // define view Explorer twice (Due to dreaded ibus issue. Not a fix yet)
+    "key": "ctrl+shift+alt+e",
+    "command": "workbench.view.explorer"
+  },
+  {
+    // define view Explorer twice (Due to dreaded ibus issue. Not a fix yet)
+    "key": "ctrl+shift+w",
+    "command": "workbench.view.explorer"
+  },
+  {
+    "key": "ctrl+shift+e",
+    "command": "workbench.view.explorer"
+  },
+  {
+    "key": "ctrl+shift+u",
+    "command": "-workbench.action.output.toggleOutput",
+    "when": "workbench.panel.output.active"
+  },
+  {
+    "key": "ctrl+shift+u",
+    "command": "workbench.action.output.toggleOutput"
+  },
+  {
+    "key": "ctrl+u",
+    "command": "-cursorUndo",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "ctrl+u",
+    "command": "-svgeditor.ungroup",
+    "when": "svgeditorWebviewFocus"
+  },
+  {
+    "key": "ctrl+u",
+    "command": "editor.action.toggleMinimap"
+  },
+  {
+    // major nuisance that “paste” attempts keep closing markdown
+    "key": "ctrl+shift+v",
+    "command": "-markdown.extension.closePreview",
+    "when": "activeWebviewPanelId == 'markdown.preview'"
+  },
+  // If the terminal is not in focus, focus on the terminal.
+  // If the terminal is focused but not maximized, maximize it (and keep focus).
+  // If the terminal is focused and maximized, unmaximize it, and focus back to the editor.
+  {
+    "key": "ctrl+shift+m",
+    "command": "-workbench.actions.view.problems"
+  },
+  {
+    "key": "ctrl+shift+m",
+    "command": "workbench.action.terminal.focus",
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "ctrl+shift+m",
+    "command": "workbench.action.toggleMaximizedPanel",
+    "when": "terminalFocus && !panelMaximized"
+  },
+  {
+    "key": "ctrl+shift+m",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "panelMaximized"
+  },
+  {
+    "key": "ctrl+shift+c",
+    "command": "-svgeditor.objectToPath",
+    "when": "svgeditorWebviewFocus"
+  },
+  {
+    "key": "ctrl+shift+c",
+    "command": "-workbench.action.terminal.openNativeConsole",
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "ctrl+shift+c",
+    "command": "workbench.panel.chat.view.copilot.focus"
+  },
+  {
+    "key": "ctrl+shift+t",
+    "command": "-workbench.action.reopenClosedEditor"
+  },
+  {
+    "key": "ctrl+shift+t",
+    "command": "workbench.view.extension.test",
+    "when": "viewContainer.workbench.view.extension.test.enabled"
+  }
+]
