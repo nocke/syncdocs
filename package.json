@@ -6,6 +6,7 @@
     "type": "module",
     "scripts": {
       "start": "node src/main.js -- param1 \"param two\"",
+      "clean": "rm -rf ./node_modules ./package-lock.json",
       "lint": "eslint",
       "lint:fix": "eslint --fix",
       "test": "mocha",
@@ -24,6 +25,10 @@
     "license": "MIT",
     "dependencies": {
         "@nocke/util": "^0.1.2"
+    },
+    "_": " ↓ fixes inflight@1.0.6 deprecation/leak warnings – https://stackoverflow.com/a/78799034",
+    "overrides": {
+        "glob": "^9"
     },
     "engines": {
         "node": ">=20.0.0"
