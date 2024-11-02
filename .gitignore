@@ -1,4 +1,4 @@
-# Logs
+co# Logs
 logs/
 *.log
 npm-debug.log*
@@ -6,6 +6,7 @@ npm-debug.log*
 # files just to analyze
 PREP_?*.*
 REF_?*.*
+!REF_keybindings.json
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
