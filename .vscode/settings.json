@@ -6,19 +6,16 @@
     "titleBar.inactiveBackground": "#303",
     "titleBar.activeBackground": "#303"
   },
-  // "eslint.validate": [
-  //   "javascript",
-  // ],
-  // "eslint.experimental.useFlatConfig": true,
-  // "eslint.workingDirectories": [
-  //   "."
-  // ],
-  // "eslint.probe": [
-  //   "javascript",
-  //   "html"
-  // ],
+  "eslint.validate": [
+    "javascript"
+  ],
+  // "eslint.probe": ["javascript"],
+  "eslint.workingDirectories": [
+    "."
+  ],
   "search.exclude": {
     "**/node_modules": true,
+    "package-lock.json": true,
   },
   "workbench.settings.enableNaturalLanguageSearch": false,
   // REF www.techiediaries.com/enable-json-comments-vs-code

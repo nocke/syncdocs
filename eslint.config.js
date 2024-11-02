@@ -1,17 +1,18 @@
 import globals from 'globals'
-import js from "@eslint/js"
+import js from '@eslint/js'
 
+// REF <-> /depot/PUBLIC/@nocke/backup/eslint.config.js
 // interesting REF: https://github.com/microsoft/vscode-eslint/blob/main/playgrounds/flat-config/eslint.config.js
 
 export default [
-  js.configs.recommended,
+  js.configs.recommended, // <=> „extends“
   {
-    "files": [
-      "**/*.js"
+    'files': [
+      '**/*.js'
     ],
-    "languageOptions": {
-      "sourceType": "module",
-      "globals": {
+    'languageOptions': {
+      'sourceType': 'module',
+      'globals': {
         ...globals.browser,
         ...globals.node,
         ...globals.es6,
@@ -19,54 +20,69 @@ export default [
         ...globals.mocha
       }
     },
-    "rules": {
-      "semi": [
-        "warn",
-        "never",
+    'rules': {
+      'semi': [
+        'warn',
+        'never',
         {
-          "beforeStatementContinuationChars": "always"
+          'beforeStatementContinuationChars': 'always'
         }
       ],
-      "no-tabs": "error",
-      "indent": [
-        "error",
+      'no-tabs': 'error',
+      'indent': [
+        'error',
         2
       ],
-      "linebreak-style": [
-        "error",
-        "unix"
+      'linebreak-style': [
+        'error',
+        'unix'
       ],
-      "max-statements-per-line": [
-        "error",
+      'quotes': [
+        'error',
+        'single',
         {
-          "max": 1
+          'allowTemplateLiterals': true,
+          'avoidEscape': true
         }
       ],
-      "space-before-function-paren": [
-        "error",
+      'no-lone-blocks': 'error',
+      'sort-imports': [
+        'error',
+        // import group, import types (categories), but no alphabetic enforcement
+        { 'ignoreDeclarationSort': true }
+      ],
+      'no-multi-spaces': 'warn',
+      'max-statements-per-line': [
+        'error',
         {
-          "anonymous": "never",
-          "named": "never",
-          "asyncArrow": "always"
+          'max': 1
         }
       ],
-      "comma-dangle": "off",
-      "no-multiple-empty-lines": [
-        "warn",
+      'space-before-function-paren': [
+        'error',
         {
-          "max": 3,
-          "maxBOF": 1,
-          "maxEOF": 1
+          'anonymous': 'never',
+          'named': 'never',
+          'asyncArrow': 'always'
         }
       ],
-      "import/no-named-as-default-member": "off",
-      "no-unused-vars": [
-        "warn",
+      'comma-dangle': 'off',
+      'no-multiple-empty-lines': [
+        'warn',
         {
-          "vars": "all",
-          "args": "none",
-          "ignoreRestSiblings": true,
-          "argsIgnorePattern": "^_"
+          'max': 3,
+          'maxBOF': 1,
+          'maxEOF': 1
+        }
+      ],
+      'import/no-named-as-default-member': 'off',
+      'no-unused-vars': [
+        'warn',
+        {
+          'vars': 'all',
+          'args': 'none',
+          'ignoreRestSiblings': true,
+          'argsIgnorePattern': '^_'
         }
       ]
     }

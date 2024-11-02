@@ -5,7 +5,7 @@ import fs from 'fs'
 import getConfig from './getConfig.js'
 
 loggedMainWrap(async () => {
-  const cwd = process.cwd() // Get current working directory
+  const cwd = process.cwd() //   Get current working directory
 
   process.argv.forEach((val, index) => {
     info(`${index}: ${val}`)
