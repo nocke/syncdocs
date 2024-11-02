@@ -1,6 +1,6 @@
 {
-    "name": "syncdocs",
-    "version": "0.2.0",
+    "name": "@nocke/syncdocs",
+    "version": "0.3.0",
     "description": "client-serverish git syncing",
     "main": "src/index.js",
     "type": "module",
